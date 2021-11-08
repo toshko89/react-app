@@ -1,8 +1,22 @@
-import db from "../firebase.js";
-import { collection, addDoc } from "firebase/firestore"; 
+// import db from "../firebase.js";
+// import { collection, addDoc } from "firebase/firestore"; 
+import { useState } from 'react';
 
-export default async function  AddBook() {
+export default function AddBook() {
+    const [name, setName] = useState();
+    const [age, setAge] = useState();
+    const [description, setDescription] = useState();
+    const [file, setFile] = useState([]);
 
+    const submitForm = (e) => {
+        e.preventDefault();
+        console.log(e.target);
+    }
+
+    const handleChangeFile = (e) => {
+        const file = e.target.files[0];
+        setFile(file);
+    }
     // try {
     //     const docRef = await addDoc(collection(db, "users"), {
     //       first: "Ada",
@@ -30,25 +44,25 @@ export default async function  AddBook() {
                         <div className="form">
                             <div id="sendmessage">New book added. Thank you!</div>
                             <div id="errormessage"></div>
-                            <form action="" method="post" role="form" className="contactForm">
+                            <form role="form" className="contactForm">
                                 <div className="form-group">
-                                    <input type="text" name="title" className="form-control" id="name" placeholder="Title" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                    <input type="text" name="title" className="form-control" id="name" placeholder="Title" value={name} data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                                     <div className="validation"></div>
                                 </div>
                                 <div className="form-group">
-                                    <input type="text" className="form-control" name="age" id="email" placeholder="Age" data-rule="string" data-msg="Please enter a valid age" />
+                                    <input type="text" className="form-control" name="age" type="number" id="email" placeholder="Age" value={age} data-rule="minlen:1" data-msg="Please enter a valid age" />
                                     <div className="validation"></div>
                                 </div>
                                 <div className="form-group">
-                                    <textarea className="form-control" name="description" rows="5" data-rule="required" data-msg="Please write something for the book" placeholder="Description"></textarea>
+                                    <textarea className="form-control" name="description" rows="5" data-rule="required" value={description} data-msg="Please write something for the book" placeholder="Description"></textarea>
                                     <div className="validation"></div>
                                 </div>
                                 <div className="form-group">
-                                    <input type="file" id="myFile" name="filename" />
+                                    <input type="file" id="myFile" name="file-name" onChange={handleChangeFile} />
                                     {/* <input type="submit" className="form-control" /> */}
                                 </div>
+                                <div className="text-center"><button type="submit" onClick={submitForm}>Add</button></div>
 
-                                <div className="text-center"><button type="submit">Add</button></div>
                             </form>
                         </div>
                     </div>

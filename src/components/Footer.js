@@ -7,7 +7,7 @@ export default function Footer() {
 					<div className="col-md-12 col-lg-4">
 						<div className="footer-logo">
 
-							<a className="navbar-brand" href="#">Kids Books</a>
+							<a className="navbar-brand" href="/#">Kids Books</a>
 							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.</p>
 
 						</div>
@@ -19,10 +19,10 @@ export default function Footer() {
 							<h4>Abou Us</h4>
 
 							<ul className="list-unstyled">
-								<li><a href="#">About us</a></li>
-								<li><a href="#">Features item</a></li>
-								<li><a href="#">Live streaming</a></li>
-								<li><a href="#">Privacy Policy</a></li>
+								<li><a href="/#">About us</a></li>
+								<li><a href="/#">Features item</a></li>
+								<li><a href="/#">Live streaming</a></li>
+								<li><a href="/#">Privacy Policy</a></li>
 							</ul>
 
 						</div>
@@ -34,10 +34,10 @@ export default function Footer() {
 							<h4>Abou Us</h4>
 
 							<ul className="list-unstyled">
-								<li><a href="#">About us</a></li>
-								<li><a href="#">Features item</a></li>
-								<li><a href="#">Live streaming</a></li>
-								<li><a href="#">Privacy Policy</a></li>
+								<li><a href="/#">About us</a></li>
+								<li><a href="/#">Features item</a></li>
+								<li><a href="/#">Live streaming</a></li>
+								<li><a href="/#">Privacy Policy</a></li>
 							</ul>
 
 						</div>
@@ -49,10 +49,10 @@ export default function Footer() {
 							<h4>Support</h4>
 
 							<ul className="list-unstyled">
-								<li><a href="#">faq</a></li>
-								<li><a href="#">Editor help</a></li>
-								<li><a href="#">Contact us</a></li>
-								<li><a href="#">Privacy Policy</a></li>
+								<li><a href="/#">faq</a></li>
+								<li><a href="/#">Editor help</a></li>
+								<li><a href="/#">Contact us</a></li>
+								<li><a href="/#">Privacy Policy</a></li>
 							</ul>
 
 						</div>
@@ -64,10 +64,10 @@ export default function Footer() {
 							<h4>Abou Us</h4>
 
 							<ul className="list-unstyled">
-								<li><a href="#">About us</a></li>
-								<li><a href="#">Features item</a></li>
-								<li><a href="#">Live streaming</a></li>
-								<li><a href="#">Privacy Policy</a></li>
+								<li><a href="/#">About us</a></li>
+								<li><a href="/#">Features item</a></li>
+								<li><a href="/#">Live streaming</a></li>
+								<li><a href="/#">Privacy Policy</a></li>
 							</ul>
 
 						</div>
