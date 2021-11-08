@@ -1202,36 +1202,36 @@ body.mobile-nav-active #mobile-nav-toggle i {
 
 /* Contact Section
 --------------------------------*/
-#contact {
+#add-book {
   background: #fff;
 }
 
-#contact .info {
+#add-book .info {
   color: #222;
 }
 
-#contact .info i {
+#add-book .info i {
   font-size: 32px;
   color: #71c55d;
   float: left;
 }
 
-#contact .info p {
+#add-book .info p {
   padding: 0 0 10px 50px;
   margin-bottom: 20px;
   line-height: 22px;
   font-size: 14px;
 }
 
-#contact .info .email p {
+#add-book .info .email p {
   padding-top: 5px;
 }
 
-#contact .social-links {
+#add-book .social-links {
   padding-bottom: 20px;
 }
 
-#contact .social-links a {
+#add-book .social-links a {
   font-size: 18px;
   display: inline-block;
   background: #71c55d;
@@ -1245,12 +1245,12 @@ body.mobile-nav-active #mobile-nav-toggle i {
   transition: 0.3s;
 }
 
-#contact .social-links a:hover {
+#add-book .social-links a:hover {
   background: #55b03f;
   color: #fff;
 }
 
-#contact .form #sendmessage {
+#add-book .form #sendmessage {
   color: #71c55d;
   border: 1px solid #71c55d;
   display: none;
@@ -1260,7 +1260,7 @@ body.mobile-nav-active #mobile-nav-toggle i {
   margin-bottom: 15px;
 }
 
-#contact .form #errormessage {
+#add-book .form #errormessage {
   color: red;
   display: none;
   border: 1px solid red;
@@ -1270,11 +1270,11 @@ body.mobile-nav-active #mobile-nav-toggle i {
   margin-bottom: 15px;
 }
 
-#contact .form #sendmessage.show, #contact .form #errormessage.show, #contact .form .show {
+#add-book .form #sendmessage.show, #add-book .form #errormessage.show, #add-book .form .show {
   display: block;
 }
 
-#contact .form .validation {
+#add-book .form .validation {
   color: red;
   display: none;
   margin: 0 0 20px;
@@ -1282,7 +1282,7 @@ body.mobile-nav-active #mobile-nav-toggle i {
   font-size: 13px;
 }
 
-#contact .form input, #contact .form textarea {
+#add-book .form input, #add-book .form textarea {
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
@@ -1290,7 +1290,7 @@ body.mobile-nav-active #mobile-nav-toggle i {
   line-height: 1;
 }
 
-#contact .form button[type="submit"] {
+#add-book .form button[type="submit"] {
   background: #71c55d;
   border: 0;
   padding: 10px 24px;
@@ -1298,7 +1298,7 @@ body.mobile-nav-active #mobile-nav-toggle i {
   transition: 0.4s;
 }
 
-#contact .form button[type="submit"]:hover {
+#add-book .form button[type="submit"]:hover {
   background: #92d283;
 }
 
