@@ -1,5 +1,5 @@
-// import db from "../firebase.js";
-// import { collection, addDoc } from "firebase/firestore"; 
+import db from "../firebase.js";
+import { collection, addDoc } from "firebase/firestore";
 import { useState } from 'react';
 
 
@@ -10,9 +10,22 @@ export default function AddBook() {
     const [description, setDescription] = useState('');
     const [file, setFile] = useState([]);
 
-    const submitForm = (e) => {
+    const submitForm = async (e) => {
         e.preventDefault();
-        console.log(e.target);
+        try {
+            const docRef = await addDoc(collection(db, "books"), {
+                title,
+                age,
+                description
+            });
+            setTitle('');
+            setAge('');
+            setDescription('');
+            setFile([]);
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
     }
 
     const handleChangeFile = (e) => {
@@ -29,16 +42,7 @@ export default function AddBook() {
             setAge(e.target.value)
         }
     }
-    // try {
-    //     const docRef = await addDoc(collection(db, "users"), {
-    //       first: "Ada",
-    //       last: "Lovelace",
-    //       born: 2020
-    //     });
-    //     console.log("Document written with ID: ", docRef.id);
-    //   } catch (e) {
-    //     console.error("Error adding document: ", e);
-    //   }
+
 
     return (
         <section id="add-book" className="padd-section wow fadeInUp">
