@@ -4,10 +4,10 @@ import { useState } from 'react';
 
 
 
-export default async function AddBook() {
-    const [name, setName] = useState();
-    const [age, setAge] = useState();
-    const [description, setDescription] = useState();
+export default function AddBook() {
+    const [title, setTitle] = useState('');
+    const [age, setAge] = useState('');
+    const [description, setDescription] = useState('');
     const [file, setFile] = useState([]);
 
     const submitForm = (e) => {
@@ -18,6 +18,16 @@ export default async function AddBook() {
     const handleChangeFile = (e) => {
         const file = e.target.files[0];
         setFile(file);
+    }
+
+    const handleChangeForm = (e) => {
+        if (e.target.name === 'description') {
+            setDescription(e.target.value)
+        } else if (e.target.name === 'title') {
+            setTitle(e.target.value)
+        } else if (e.target.name === 'age') {
+            setAge(e.target.value)
+        }
     }
     // try {
     //     const docRef = await addDoc(collection(db, "users"), {
@@ -32,7 +42,6 @@ export default async function AddBook() {
 
     return (
         <section id="add-book" className="padd-section wow fadeInUp">
-
             <div className="container">
                 <div className="section-title text-center">
                     <h2>Add new book</h2>
@@ -48,15 +57,15 @@ export default async function AddBook() {
                             <div id="errormessage"></div>
                             <form role="form" className="contactForm">
                                 <div className="form-group">
-                                    <input type="text" name="title" className="form-control" id="name" placeholder="Title" value={name} data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                    <input type="text" name="title" className="form-control" id="name" placeholder="Title" value={title} onChange={handleChangeForm} data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                                     <div className="validation"></div>
                                 </div>
                                 <div className="form-group">
-                                    <input type="number" className="form-control" name="age" id="email" placeholder="Age" value={age} data-rule="minlen:1" data-msg="Please enter a valid age" />
+                                    <input type="number" className="form-control" name="age" id="email" placeholder="Age" value={age} onChange={handleChangeForm} data-rule="minlen:1" data-msg="Please enter a valid age" />
                                     <div className="validation"></div>
                                 </div>
                                 <div className="form-group">
-                                    <textarea className="form-control" name="description" rows="5" data-rule="required" value={description} data-msg="Please write something for the book" placeholder="Description"></textarea>
+                                    <textarea className="form-control" name="description" rows="5" data-rule="required" value={description} onChange={handleChangeForm} data-msg="Please write something for the book" placeholder="Description"></textarea>
                                     <div className="validation"></div>
                                 </div>
                                 <div className="form-group">
