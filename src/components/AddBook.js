@@ -1,8 +1,6 @@
-import db from "../firebase.js";
-import { collection, addDoc } from "firebase/firestore";
+
 import { useState } from 'react';
-
-
+import { addBook } from '../services/addBookService.js';
 
 export default function AddBook() {
     const [title, setTitle] = useState('');
@@ -12,22 +10,22 @@ export default function AddBook() {
 
     const submitForm = async (e) => {
         e.preventDefault();
+        if (title.trim() == '' || age.trim() == '' || description.trim() == '') {
+            alert('All fields are required!')
+        }
+
         try {
-            const docRef = await addDoc(collection(db, "books"), {
-                title,
-                age,
-                description
-            });
+            const newBook = await addBook(title, age, description);
+            console.log(newBook);
             setTitle('');
             setAge('');
             setDescription('');
             setFile([]);
-            console.log("Document written with ID: ", docRef.id);
-          } catch (e) {
-            console.error("Error adding document: ", e);
-          }
+        } catch (error) {
+            console.log(error);
+        }
     }
-
+    
     const handleChangeFile = (e) => {
         const file = e.target.files[0];
         setFile(file);
@@ -42,7 +40,6 @@ export default function AddBook() {
             setAge(e.target.value)
         }
     }
-
 
     return (
         <section id="add-book" className="padd-section wow fadeInUp">
