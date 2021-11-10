@@ -1,33 +1,36 @@
+import { Link } from "react-router-dom";
+
 export default function Header() {
-    return (
-        <header id="header" className="header header-hide">
-        <div className="container">
-    
-          <div id="logo" className="pull-left">
-            <h1><a href="/#body" className="scrollto"><span>Kids</span>Share A Book</a></h1>
-          </div>
-    
-          <nav id="nav-menu-container">
-            <ul className="nav-menu">
-              <li className="menu-active"><a href="/#home">Home</a></li>
-              <li><a href="/#about-us">About</a></li>
-              <li><a href="/#bookshelf">Bookshelf</a></li>
-              <li><a href="/#my-books">My books</a></li>
-              <li><a href="/#register">Register</a></li>
-              <li><a href="/#login">Login</a></li>
-              <li><a href="/#logout">Logout</a></li>
-              <li className="menu-has-children"><a href="/#">Drop Down</a>
-                <ul>
-                  <li><a href="/#">Drop Down 1</a></li>
-                  <li><a href="/#">Drop Down 3</a></li>
-                  <li><a href="/#">Drop Down 4</a></li>
-                  <li><a href="/#">Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="/#contact">Contact</a></li>
-            </ul>
-          </nav>
+  return (
+    <header id="header" className="header header-hide">
+      <div className="container">
+
+        <div id="logo" className="pull-left">
+          <h1><Link to="/" className="scrollto"><span>Kids</span>Share A Book</Link></h1>
         </div>
-      </header>
-    );
+
+        <nav id="nav-menu-container">
+          <ul className="nav-menu">
+            {/* <Link to="/catalog">Catalog</Link> */}
+            <li className="menu-active"><Link to="/">Home</Link></li>
+            <li><Link to="/about-us">About</Link></li>
+            <li><Link to="/bookshelf">Bookshelf</Link></li>
+            <li><Link to="/my-books">My books</Link></li>
+            <li><Link to="/add-book">Add Book</Link></li>
+            <li><Link to="/register">Register</Link></li>
+            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/logout">Logout</Link></li>
+            <li className="menu-has-children"><Link to="/#">Drop Down</Link>
+              <ul>
+                <li><Link to="/#">Drop Down 1</Link></li>
+                <li><Link to="/#">Drop Down 2</Link></li>
+                <li><Link to="/#">Drop Down 3</Link></li>
+                <li><Link to="/#">Drop Down 4</Link></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
 }

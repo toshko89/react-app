@@ -11,7 +11,8 @@ export default function AddBook() {
     const submitForm = async (e) => {
         e.preventDefault();
         if (title.trim() == '' || age.trim() == '' || description.trim() == '') {
-            alert('All fields are required!')
+            alert('All fields are required!');
+            return;
         }
 
         try {
