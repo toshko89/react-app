@@ -15,8 +15,7 @@ export default function AddBook() {
         }
 
         try {
-            const newBook = await addBook(title, age, description);
-            console.log(newBook);
+            await addBook(title, age, description);
             setTitle('');
             setAge('');
             setDescription('');
@@ -25,7 +24,7 @@ export default function AddBook() {
             console.log(error);
         }
     }
-    
+
     const handleChangeFile = (e) => {
         const file = e.target.files[0];
         setFile(file);
