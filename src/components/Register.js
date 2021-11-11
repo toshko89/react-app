@@ -1,27 +1,36 @@
 import { useState } from "react";
+import { registerUser } from "../services/registerUserService.js";
 
 export default function Register() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rePass, setRepass] = useState('');
+  
+  const regExForEmail = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i
 
-  const register = (e) => {
+  const register = async (e) => {
     e.preventDefault();
-    const regEx = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i
     if (password !== rePass) {
-      e.target.reset();
       alert('Password doesn\'t match');
-      e.target.reset();
       return;
-    } else if (!regEx.test(email)){
-      e.target.reset();
+    } else if (!regExForEmail.test(email)) {
+      alert('Please enter a valid email');
       return;
-    }else if(password.length < 6){
-      e.target.reset();
+    } else if (password.length < 6) {
       alert('Please enter at least 6 chars for password');
       return;
     }
+
+    try {
+      const userData = await registerUser(email, password);
+      console.log(userData);
+    } catch (error) {
+      console.log(error);
+      console.log(e.target);
+    }
+
+
   }
 
   const handleChangeForm = (e) => {
