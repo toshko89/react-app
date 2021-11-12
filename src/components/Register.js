@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { registerUser } from "../services/registerUserService.js";
+import { registerUser } from "../services/authService.js";
 
 export default function Register() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rePass, setRepass] = useState('');
-  
+
   const regExForEmail = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i
 
   const register = async (e) => {

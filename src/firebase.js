@@ -1,8 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from 'firebase/auth';
 
-const firebaseConfig = initializeApp({
+initializeApp({
     apiKey: "AIzaSyCurNw2mEhoo2-l6PCZgQqtyQELxCyLnLU",
     authDomain: "first-react-project-8439a.firebaseapp.com",
     databaseURL: "https://first-react-project-8439a-default-rtdb.europe-west1.firebasedatabase.app",
@@ -14,6 +13,4 @@ const firebaseConfig = initializeApp({
 });
 
 const db = getFirestore();
-const auth = getAuth();
-console.log(auth);
-export { db, auth };
+export { db };
