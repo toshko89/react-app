@@ -29,8 +29,6 @@ export default function Register() {
       console.log(error);
       console.log(e.target);
     }
-
-
   }
 
   const handleChangeForm = (e) => {

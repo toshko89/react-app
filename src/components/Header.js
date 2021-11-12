@@ -1,4 +1,17 @@
 import { Link } from "react-router-dom";
+import { logout } from "../services/authService.js";
+
+async function signOut() {
+  try {
+    let l = await logout();
+    localStorage.clear();
+    console.log(l);
+    this.props.history.push('/');
+  } catch (error) {
+    console.log(error);
+  }
+
+}
 
 export default function Header() {
   return (
@@ -11,7 +24,6 @@ export default function Header() {
 
         <nav id="nav-menu-container">
           <ul className="nav-menu">
-            {/* <Link to="/catalog">Catalog</Link> */}
             <li className="menu-active"><Link to="/">Home</Link></li>
             <li><Link to="/about-us">About</Link></li>
             <li><Link to="/bookshelf">Bookshelf</Link></li>
@@ -19,7 +31,7 @@ export default function Header() {
             <li><Link to="/add-book">Add Book</Link></li>
             <li><Link to="/register">Register</Link></li>
             <li><Link to="/login">Login</Link></li>
-            <li><Link to="/logout">Logout</Link></li>
+            <li><Link to="/logout" onClick={signOut}>Logout</Link></li>
             <li className="menu-has-children"><Link to="/#">Drop Down</Link>
               <ul>
                 <li><Link to="/#">Drop Down 1</Link></li>
