@@ -2,23 +2,20 @@ import { useState } from 'react';
 import { addBook } from '../services/addBookService.js';
 
 export default function AddBook() {
-  const [title, setTitle] = useState('');
-  const [age, setAge] = useState('');
-  const [description, setDescription] = useState('');
+  const [book, setBook] = useState({ title: '', age: '', description: '' });
   const [file, setFile] = useState([]);
 
   const submitForm = async (e) => {
     e.preventDefault();
-    if (title.trim() === '' || age.trim() === '' || description.trim() === '') {
+    if (book.title.trim() === '' || book.age.trim() === '' || book.description.trim() === '') {
+      setBook({ title: '', age: '', description: '' });
       alert('All fields are required!');
       return;
     }
 
     try {
-      await addBook(title, age, description);
-      setTitle('');
-      setAge('');
-      setDescription('');
+      await addBook(book.title, book.age, book.description);
+      setBook({ title: '', age: '', description: '' });
       setFile([]);
     } catch (error) {
       console.log(error);
@@ -28,16 +25,6 @@ export default function AddBook() {
   const handleChangeFile = (e) => {
     const file = e.target.files[0];
     setFile(file);
-  }
-
-  const handleChangeForm = (e) => {
-    if (e.target.name === 'description') {
-      setDescription(e.target.value)
-    } else if (e.target.name === 'title') {
-      setTitle(e.target.value)
-    } else if (e.target.name === 'age') {
-      setAge(e.target.value)
-    }
   }
 
   return (
@@ -57,15 +44,21 @@ export default function AddBook() {
               <div id="errormessage"></div>
               <form role="form" role="form" className="contactForm">
                 <div className="form-group">
-                  <input type="text" name="title" className="form-control" id="name" placeholder="Title" value={title} onChange={handleChangeForm} data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                  <input type="text" name="title" className="form-control" id="name" placeholder="Title" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
+                    value={book.title}
+                    onChange={(e) => { setBook({ ...book, title: e.target.value }) }} />
                   <div className="validation"></div>
                 </div>
                 <div className="form-group">
-                  <input type="number" className="form-control" name="age" id="email" placeholder="Age" value={age} onChange={handleChangeForm} data-rule="minlen:1" data-msg="Please enter a valid age" />
+                  <input type="number" className="form-control" name="age" id="email" placeholder="Age" data-rule="minlen:1" data-msg="Please enter a valid age"
+                    value={book.age}
+                    onChange={(e) => { setBook({ ...book, age: e.target.value }) }} />
                   <div className="validation"></div>
                 </div>
                 <div className="form-group">
-                  <textarea className="form-control" name="description" rows="5" data-rule="required" value={description} onChange={handleChangeForm} data-msg="Please write something for the book" placeholder="Description"></textarea>
+                  <textarea className="form-control" name="description" rows="5" data-rule="required" data-msg="Please write something for the book" placeholder="Description"
+                    value={book.description}
+                    onChange={(e) => { setBook({ ...book, description: e.target.value }) }} />
                   <div className="validation"></div>
                 </div>
                 <div className="form-group">
