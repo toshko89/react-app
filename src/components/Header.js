@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { logout } from "../services/authService.js";
 
+
+
+//TODO finish the redirect!!!
+//TODO ERROR page kato Home page-a
 async function signOut() {
   try {
     let l = await logout();
