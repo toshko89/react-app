@@ -2,14 +2,13 @@ import { Link } from "react-router-dom";
 import { logout } from "../services/authService.js";
 
 
-
 //TODO finish the redirect!!!
 //TODO ERROR page kato Home page-a
 async function signOut() {
   try {
-    let l = await logout();
+    const out = await logout();
     localStorage.clear();
-    console.log(l);
+    console.log(out);
     this.props.history.push('/');
   } catch (error) {
     console.log(error);
@@ -36,14 +35,6 @@ export default function Header() {
             <li><Link to="/register">Register</Link></li>
             <li><Link to="/login">Login</Link></li>
             <li><Link to="/logout" onClick={signOut}>Logout</Link></li>
-            <li className="menu-has-children"><Link to="/#">Drop Down</Link>
-              <ul>
-                <li><Link to="/#">Drop Down 1</Link></li>
-                <li><Link to="/#">Drop Down 2</Link></li>
-                <li><Link to="/#">Drop Down 3</Link></li>
-                <li><Link to="/#">Drop Down 4</Link></li>
-              </ul>
-            </li>
           </ul>
         </nav>
       </div>

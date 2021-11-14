@@ -9,6 +9,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const userDetails = await login(user.email, user.password);
+      setUser({ email: '', password: '' });
       console.log(userDetails);
     } catch (error) {
       console.log(error);
