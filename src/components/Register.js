@@ -4,7 +4,7 @@ import { registerUser } from "../services/authService.js";
 export default function Register() {
 
   const [user, setUser] = useState({ email: '', password: '', rePass: '' });
-  
+
   const regExForEmail = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i
 
   const register = async (e) => {
@@ -15,21 +15,20 @@ export default function Register() {
       return;
     } else if (user.password.length < 6) {
       alert('Please enter at least 6 chars for password');
-      setUser({ email: '', password: '', rePass: '' });
+      setUser({ ...user, password: '', rePass: '' });
       return;
     } else if (user.password !== user.rePass) {
       alert('Password doesn\'t match');
-      setUser({ email: '', password: '', rePass: '' });
+      setUser({ ...user, password: '', rePass: '' });
       return;
     }
-    
+
     try {
       const userData = await registerUser(user.email, user.password);
       setUser({ email: '', password: '', rePass: '' });
       console.log(userData);
     } catch (error) {
       console.log(error);
-      console.log(e.target);
     }
   }
 

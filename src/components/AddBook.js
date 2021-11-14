@@ -40,9 +40,7 @@ export default function AddBook() {
         <div className="row justify-content-center">
           <div className="col-lg-5 col-md-8">
             <div className="form">
-              <div id="sendmessage">New book added. Thank you!</div>
-              <div id="errormessage"></div>
-              <form role="form" role="form" className="contactForm">
+              <form role="form" className="contactForm">
                 <div className="form-group">
                   <input type="text" name="title" className="form-control" id="name" placeholder="Title" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
                     value={book.title}
