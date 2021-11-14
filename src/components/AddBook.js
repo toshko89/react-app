@@ -32,7 +32,6 @@ export default function AddBook() {
       <div className="container">
         <div className="section-title text-center">
           <h2>Add new book</h2>
-          <p className="separator">Add new book below</p>
         </div>
       </div>
 
