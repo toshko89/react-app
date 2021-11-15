@@ -1,20 +1,7 @@
 import { Link } from "react-router-dom";
-import { logout } from "../services/authService.js";
-
 
 //TODO finish the redirect!!!
 //TODO ERROR page kato Home page-a
-async function signOut() {
-  try {
-    const out = await logout();
-    localStorage.clear();
-    console.log(out);
-    this.props.history.push('/');
-  } catch (error) {
-    console.log(error);
-  }
-
-}
 
 export default function Header() {
   return (
@@ -34,7 +21,7 @@ export default function Header() {
             <li><Link to="/add-book">Add Book</Link></li>
             <li><Link to="/register">Register</Link></li>
             <li><Link to="/login">Login</Link></li>
-            <li><Link to="/logout" onClick={signOut}>Logout</Link></li>
+            <li><Link to="/logout">Logout</Link></li>
           </ul>
         </nav>
       </div>

@@ -1,4 +1,4 @@
-import { db } from "../firebase.js";
+import { db } from "../utils/firebase.js";
 import { collection, addDoc, getDoc } from "firebase/firestore";
 
 const addBook = async (title, age, description) => {
