@@ -15,4 +15,13 @@ const firebaseConfig = initializeApp({
 
 const db = getFirestore();
 const auth = getAuth();
+
+firebase.auth().onAuthStateChanged((user)=>{
+    if(user){
+        console.log('Loged in');
+    }else{
+        console.log('Logged Out');
+    }
+})
+
 export { db, auth };
