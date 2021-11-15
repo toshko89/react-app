@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { auth } from '../firebase.js'
+import { auth } from '../utils/firebase.js'
 
 function registerUser(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
@@ -25,6 +25,7 @@ function login(email, password) {
 
 function logout() {
     return signOut(auth).then(() => {
+        console.log('Sign-out successful.');
         return 'Sign-out successful.';
     }).catch((error) => {
         return error;
