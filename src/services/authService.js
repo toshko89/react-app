@@ -25,7 +25,6 @@ function login(email, password) {
 
 function logout() {
     return signOut(auth).then(() => {
-        console.log('Sign-out successful.');
         return 'Sign-out successful.';
     }).catch((error) => {
         return error;

@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getStorage, ref } from "firebase/storage";
 
 const firebaseConfig = initializeApp({
     apiKey: "AIzaSyCurNw2mEhoo2-l6PCZgQqtyQELxCyLnLU",
@@ -15,6 +16,8 @@ const firebaseConfig = initializeApp({
 
 const db = getFirestore();
 const auth = getAuth();
+const storage = getStorage(firebaseConfig);
+const imagesRef = ref(storage, 'images');
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -24,4 +27,4 @@ onAuthStateChanged(auth, (user) => {
     }
 })
 
-export { db, auth };
+export { db, auth, imagesRef };

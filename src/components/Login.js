@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { login } from "../services/authService.js";
 
-export default function Login() {
+export default function Login({ history }) {
 
   const [user, setUser] = useState({ email: '', password: '' });
 

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { addBook } from '../services/addBookService.js';
 
 export default function AddBook() {
+
   const [book, setBook] = useState({ title: '', age: '', description: '' });
   const [file, setFile] = useState([]);
 
@@ -14,7 +15,7 @@ export default function AddBook() {
     }
 
     try {
-      await addBook(book.title, book.age, book.description);
+      await addBook(book.title, book.age, book.description, file);
       setBook({ title: '', age: '', description: '' });
       setFile([]);
     } catch (error) {
@@ -59,7 +60,7 @@ export default function AddBook() {
                   <div className="validation"></div>
                 </div>
                 <div className="form-group">
-                  <input type="file" id="myFile" name="file-name" onChange={handleChangeFile} />
+                  <input type="file" id="myFile" name="file-name" value={undefined} onChange={handleChangeFile} />
                 </div>
 
                 <div className="text-center"><button type="submit" onClick={submitForm}>Add</button></div>
