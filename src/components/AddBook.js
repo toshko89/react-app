@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { addBook } from '../services/addBookService.js';
+import { addBook } from '../services/bookService.js';
 
 export default function AddBook() {
 

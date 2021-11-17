@@ -1,5 +1,5 @@
 import { db, imagesRef } from "../utils/firebase.js";
-import { collection, addDoc, getDoc } from "firebase/firestore";
+import { collection, addDoc, getDoc, getDocs } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const addBook = async (title, age, description, file) => {
@@ -12,7 +12,7 @@ const addBook = async (title, age, description, file) => {
             age,
             description,
             likes: 0,
-            img: imgUrl
+            img: imgUrl,
         });
         const docSnap = await getDoc(docRef);
         console.log(docSnap.data());
@@ -23,4 +23,13 @@ const addBook = async (title, age, description, file) => {
     }
 }
 
-export { addBook }
+const getAllBooks = async () => {
+    const querySnapshot = await getDocs(collection(db, "books"));
+    const allBooks = querySnapshot.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() }
+    });
+
+    return allBooks;
+}
+
+export { addBook, getAllBooks }
