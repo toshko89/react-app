@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
+import { getAllBooks } from "../services/bookService.js"
+import BookCard from './BooksCard.js';
+
 
 export default function Bookshelf() {
 
-  
+  const [books, setBooks] = useState({});
+
+  useEffect(async () => {
+    const allBooks = await getAllBooks();
+    setBooks(allBooks);
+  }, [])
+
 
   return (
 
@@ -12,57 +21,18 @@ export default function Bookshelf() {
         <div className="section-title text-center">
 
           <h2>Bookshelf</h2>
-          <p className="separator">Our Latest Arrivals</p>
+          {books.length > 0
+            ? <p className="separator">Our Latest Arrivals</p>
+            : <p className="separator">No books yet</p>}
 
         </div>
       </div>
 
       <div className="container">
         <div className="row">
-          <div className="col-md-6 col-lg-4">
-            <div className="block-blog text-left">
-              <a href="#"><img src="img/blog/blog-image-1.jpg" alt="img"/></a>
-              <div className="content-blog">
-                <h4><a href="#">whats isthe difference between good and bat typography</a></h4>
-                <span>05, juin 2017</span>
-                <a className="pull-right readmore" href="#">read more</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-4">
-            <div className="block-blog text-left">
-              <a href="#"><img src="img/blog/blog-image-2.jpg" className="img-responsive" alt="img"/></a>
-              <div className="content-blog">
-                <h4><a href="#">whats isthe difference between good and bat typography</a></h4>
-                <span>05, juin 2017</span>
-                <a className="pull-right readmore" href="#">read more</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-4">
-            <div className="block-blog text-left">
-              <a href="#"><img src="img/blog/blog-image-3.jpg" className="img-responsive" alt="img"/></a>
-              <div className="content-blog">
-                <h4><a href="#">whats isthe difference between good and bat typography</a></h4>
-                <span>05, juin 2017</span>
-                <a className="pull-right readmore" href="#">read more</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-4">
-            <div className="block-blog text-left">
-              <a href="#"><img src="img/blog/blog-image-1.jpg" alt="img"/></a>
-              <div className="content-blog">
-                <h4><a href="#">whats isthe difference between good and bat typography</a></h4>
-                <span>05, juin 2017</span>
-                <a className="pull-right readmore" href="#">read more</a>
-              </div>
-            </div>
-          </div>
-
+          {books.length > 0
+            ? books.map(book => <BookCard key={book.id} book={book} />)
+            : <img src="img/kid-reading-a-book.jpg" className="center" alt="img"/>}
         </div>
       </div>
     </section>
