@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 export default function BookCard ({book}){
-    console.log(book);
     return(
         <div className="col-md-6 col-lg-4">
         <div className="block-blog text-left">

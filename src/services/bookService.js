@@ -12,10 +12,9 @@ const addBook = async (title, age, description, file) => {
             age,
             description,
             likes: 0,
-            img: imgUrl,
+            img: imgUrl
         });
         const docSnap = await getDoc(docRef);
-        console.log(docSnap.data());
         return docSnap.data();
     } catch (e) {
         console.error("Error adding document: ", e);
