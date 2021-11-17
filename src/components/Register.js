@@ -44,7 +44,7 @@ export default function Register() {
         <div className="row justify-content-center">
           <div className="col-lg-5 col-md-8">
             <div className="form">
-              <form role="form" className="contactForm" onSubmit={register}>
+              <form className="contactForm" onSubmit={register}>
                 <div className="form-group">
                   <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email"
                     value={user.email}
@@ -53,14 +53,14 @@ export default function Register() {
                   <div className="validation"></div>
                 </div>
                 <div className="form-group">
-                  <input type="password" className="form-control" name="password" id="name" placeholder="Password" data-rule="minlen:6" data-msg="Please enter at least 6 chars for password"
+                  <input type="password" autoComplete="on" className="form-control" name="password" id="name" placeholder="Password" data-rule="minlen:6" data-msg="Please enter at least 6 chars for password"
                     value={user.password}
                     onChange={(e) => setUser({ ...user, password: e.target.value })}
                   />
                   <div className="validation"></div>
                 </div>
                 <div className="form-group">
-                  <input type="password" className="form-control" name="rePass" id="subject" placeholder="Confirm Password" data-rule="minlen:6" data-msg="Please enter at least 6 chars for password"
+                  <input type="password" autoComplete="on" className="form-control" name="rePass" id="subject" placeholder="Confirm Password" data-rule="minlen:6" data-msg="Please enter at least 6 chars for password"
                     value={user.rePass}
                     onChange={(e) => setUser({ ...user, rePass: e.target.value })}
                   />

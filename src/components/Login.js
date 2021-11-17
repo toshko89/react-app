@@ -28,7 +28,7 @@ export default function Login({ history }) {
         <div className="row justify-content-center">
           <div className="col-lg-5 col-md-8">
             <div className="form">
-              <form role="form" className="contactForm" onSubmit={signIn}>
+              <form className="contactForm" onSubmit={signIn}>
                 <div className="form-group">
                   <input type="email" className="form-control" name="email" id="email" placeholder="Your Email"
                     value={user.email}
@@ -36,7 +36,7 @@ export default function Login({ history }) {
                   />
                 </div>
                 <div className="form-group">
-                  <input type="password" className="form-control" name="subject" id="subject" placeholder="Password"
+                  <input type="password" autoComplete="on" className="form-control" name="subject" id="subject" placeholder="Password"
                     value={user.password}
                     onChange={(e) => setUser({ ...user, password: e.target.value })}
                   />

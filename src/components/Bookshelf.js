@@ -7,9 +7,12 @@ export default function Bookshelf() {
 
   const [books, setBooks] = useState({});
 
-  useEffect(async () => {
-    const allBooks = await getAllBooks();
-    setBooks(allBooks);
+  useEffect(() => {
+    async function fetchData() {
+      const allBooks = await getAllBooks();
+      setBooks(allBooks);
+    }
+    fetchData();
   }, [])
 
 
@@ -32,7 +35,8 @@ export default function Bookshelf() {
         <div className="row">
           {books.length > 0
             ? books.map(book => <BookCard key={book.id} book={book} />)
-            : <img src="img/kid-reading-a-book.jpg" className="center" alt="img"/>}
+            : <img src="img/kid-reading-a-book.jpg" className="center" alt="img" />
+          }
         </div>
       </div>
     </section>
