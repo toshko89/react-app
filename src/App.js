@@ -16,8 +16,9 @@ function App() {
 
   return (
     <>
-      <Header />
 
+      <Header />
+      //TODO ERROR HANDLING FOR EMAIL and pass when login and register!!!
       <Routes >
         <Route path="/" exact element={<Home />}></Route>
         <Route path="/add-book" element={<AddBook />}></Route>
@@ -26,7 +27,6 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="*" element={<ErrorPage />}></Route>
-
       </Routes >
 
       <Footer />
