@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 //TODO finish the redirect!!!
 //TODO ERROR page kato Home page-a
@@ -15,13 +15,13 @@ export default function Header() {
         <nav id="nav-menu-container">
           <ul className="nav-menu">
             <li className="menu-active"><Link to="/">Home</Link></li>
-            <li><Link to="/about-us">About</Link></li>
-            <li><Link to="/bookshelf">Bookshelf</Link></li>
-            <li><Link to="/my-books">My books</Link></li>
-            <li><Link to="/add-book">Add Book</Link></li>
-            <li><Link to="/register">Register</Link></li>
-            <li><Link to="/login">Login</Link></li> 
-            <li><Link to="/logout">Logout</Link></li> 
+            <li><NavLink to="/about-us">About</NavLink></li>
+            <li><NavLink to="/bookshelf">Bookshelf</NavLink></li>
+            <li><NavLink to="/my-books">My books</NavLink></li>
+            <li><NavLink to="/add-book">Add Book</NavLink></li>
+            <li><NavLink to="/register">Register</NavLink></li>
+            <li><NavLink to="/login">Login</NavLink></li> 
+            <li><NavLink to="/logout">Logout</NavLink></li> 
           </ul>
           
         </nav>
