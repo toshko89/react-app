@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { registerUser } from "../services/authService.js";
 
 export default function Register() {
 
   const [user, setUser] = useState({ email: '', password: '', rePass: '' });
+
+  const navigate = useNavigate();
 
   const regExForEmail = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i
 
@@ -26,7 +29,7 @@ export default function Register() {
     try {
       const userData = await registerUser(user.email, user.password);
       setUser({ email: '', password: '', rePass: '' });
-      console.log(userData);
+      navigate('/bookshelf');
     } catch (error) {
       console.log(error);
     }

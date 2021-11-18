@@ -1,16 +1,18 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { login } from "../services/authService.js";
 
 export default function Login({ history }) {
 
   const [user, setUser] = useState({ email: '', password: '' });
+  const navigate = useNavigate();
 
   const signIn = async (e) => {
     e.preventDefault();
     try {
       const userDetails = await login(user.email, user.password);
       setUser({ email: '', password: '' });
-      console.log(userDetails);
+      navigate('/bookshelf');
     } catch (error) {
       console.log(error);
     }
