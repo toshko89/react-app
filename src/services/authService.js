@@ -2,33 +2,38 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } f
 import { auth } from '../utils/firebase.js'
 
 function registerUser(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password)
+    const userData = createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
             return user;
         })
-        .catch((error) => {
-            return error;
+        .catch((signUpError) => {
+            return signUpError.message;
         });
+
+    return userData;
 }
 
 function login(email, password) {
-    return signInWithEmailAndPassword(auth, email, password)
+    const userData = signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
             return user;
         })
-        .catch((error) => {
-            return error;
+        .catch((signUpError) => {
+            return signUpError.message;
         });
+    return userData;
 }
 
 function logout() {
-    return signOut(auth).then(() => {
+    const userData = signOut(auth).then(() => {
         return 'Sign-out successful.';
-    }).catch((error) => {
-        return error;
+    }).catch((signUpError) => {
+        return signUpError.message;
     });
+
+    return userData;
 }
 
 export { registerUser, login, logout }

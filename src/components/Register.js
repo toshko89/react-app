@@ -28,10 +28,11 @@ export default function Register() {
 
     try {
       const userData = await registerUser(user.email, user.password);
+      console.log(userData);
       setUser({ email: '', password: '', rePass: '' });
-      navigate('/bookshelf');
-    } catch (error) {
-      console.log(error);
+      navigate('/bookshelf',{replace:true});
+    } catch (signUpError) {
+      console.log(signUpError);
     }
   }
 

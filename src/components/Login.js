@@ -12,7 +12,7 @@ export default function Login({ history }) {
     try {
       const userDetails = await login(user.email, user.password);
       setUser({ email: '', password: '' });
-      navigate('/bookshelf');
+      navigate('/bookshelf',{replace:true});
     } catch (error) {
       console.log(error);
     }

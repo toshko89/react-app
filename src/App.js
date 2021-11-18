@@ -7,6 +7,7 @@ import Bookshelf from './components/Bookshelf.js';
 import BookDetails from './components/BookDetails.js';
 import Register from './components/Register.js';
 import Login from './components/Login.js';
+import ErrorPage from './components/ErrorPage.js'
 import { logout } from './services/authService.js';
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
         <Route path="/details/:bookId" element={<BookDetails />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="*" element={<ErrorPage />}></Route>
+
       </Routes >
 
       <Footer />
