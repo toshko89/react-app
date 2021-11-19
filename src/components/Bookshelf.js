@@ -13,7 +13,13 @@ export default function Bookshelf() {
       setBooks(allBooks);
     }
     fetchData();
-  }, [])
+  }, []);
+
+  const spinner = <div className="d-flex justify-content-center">
+    <div className="spinner-border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
+  </div>
 
 
   return (
@@ -35,11 +41,7 @@ export default function Bookshelf() {
         <div className="row">
           {books.length > 0
             ? books.map(book => <BookCard key={book.id} book={book} />)
-            : <div className="d-flex justify-content-center">
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
+            : spinner
             // : <img src="img/kid-reading-a-book.jpg" className="center" alt="img" />
           }
         </div>
