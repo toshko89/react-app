@@ -35,7 +35,12 @@ export default function Bookshelf() {
         <div className="row">
           {books.length > 0
             ? books.map(book => <BookCard key={book.id} book={book} />)
-            : <img src="img/kid-reading-a-book.jpg" className="center" alt="img" />
+            : <div className="d-flex justify-content-center">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            // : <img src="img/kid-reading-a-book.jpg" className="center" alt="img" />
           }
         </div>
       </div>

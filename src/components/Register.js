@@ -30,7 +30,7 @@ export default function Register() {
       const userData = await registerUser(user.email, user.password);
       setUser({ email: '', password: '', rePass: '' });
       if (userData.name !== "FirebaseError") {
-        navigate('/bookshelf',{replace:true});
+        navigate('/bookshelf');
       }
 
     } catch (signUpError) {
