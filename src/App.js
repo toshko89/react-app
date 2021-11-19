@@ -12,8 +12,6 @@ import { logout } from './services/authService.js';
 
 function App() {
 
-  const navigate = useNavigate();
-
   return (
     <>
 

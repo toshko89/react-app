@@ -10,9 +10,9 @@ export default function Login({ history }) {
   const signIn = async (e) => {
     e.preventDefault();
     try {
-      const userDetails = await login(user.email, user.password);
+      const userData = await login(user.email, user.password);
       setUser({ email: '', password: '' });
-      if (userDetails.name !== "FirebaseError") {
+      if (userData.name !== "FirebaseError") {
         navigate('/bookshelf',{replace:true});
       }
     } catch (error) {
