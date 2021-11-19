@@ -8,7 +8,8 @@ function registerUser(email, password) {
             return user;
         })
         .catch((signUpError) => {
-            return signUpError.message;
+            alert(signUpError.message);
+            return signUpError;
         });
 
     return userData;
@@ -21,8 +22,10 @@ function login(email, password) {
             return user;
         })
         .catch((signUpError) => {
-            return signUpError.message;
+            alert('Wrong user name or password');
+            return signUpError;
         });
+
     return userData;
 }
 

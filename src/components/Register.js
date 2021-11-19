@@ -28,9 +28,11 @@ export default function Register() {
 
     try {
       const userData = await registerUser(user.email, user.password);
-      console.log(userData);
       setUser({ email: '', password: '', rePass: '' });
-      navigate('/bookshelf',{replace:true});
+      if (userData.name !== "FirebaseError") {
+        navigate('/bookshelf',{replace:true});
+      }
+
     } catch (signUpError) {
       console.log(signUpError);
     }
@@ -70,7 +72,7 @@ export default function Register() {
                   />
                   <div className="validation"></div>
                 </div>
-                <div className="text-center"><button type="submit">Register</button></div>  
+                <div className="text-center"><button type="submit">Register</button></div>
               </form>
             </div>
           </div>
