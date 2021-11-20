@@ -1,4 +1,5 @@
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import Home from './components/Home.js';
@@ -8,27 +9,40 @@ import BookDetails from './components/BookDetails.js';
 import Register from './components/Register.js';
 import Login from './components/Login.js';
 import ErrorPage from './components/ErrorPage.js'
-import { logout } from './services/authService.js';
+import UserContext from './context/userContext.js';
+import { authState } from './utils/firebase.js';
+
 
 function App() {
 
+  const [user, setUser] = useState(null);
+ 
+  useEffect(() => {
+    const userData = authState();
+    setUser(userData);
+  }, []);
+
+  console.log(user);
+
   return (
     <>
+      <UserContext.Provider value={user}>
 
-      <Header />
-      //TODO ERROR HANDLING FOR EMAIL and pass when login and register!!!
-      <Routes >
-        <Route path="/" exact element={<Home />}></Route>
-        <Route path="/add-book" element={<AddBook />}></Route>
-        <Route path="/bookshelf" element={<Bookshelf />}></Route>
-        <Route path="/details/:bookId" element={<BookDetails />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="*" element={<ErrorPage />}></Route>
-      </Routes >
+        <Header />
 
-      <Footer />
+        <Routes >
+          <Route path="/" exact element={<Home />}></Route>
+          <Route path="/add-book" element={<AddBook />}></Route>
+          <Route path="/bookshelf" element={<Bookshelf />}></Route>
+          <Route path="/details/:bookId" element={<BookDetails />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="*" element={<ErrorPage />}></Route>
+        </Routes >
 
+        <Footer />
+
+      </UserContext.Provider>
     </>
   );
 }
