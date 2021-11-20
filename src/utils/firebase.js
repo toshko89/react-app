@@ -19,12 +19,15 @@ const auth = getAuth();
 const storage = getStorage(firebaseConfig);
 const imagesRef = ref(storage, 'images');
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        console.log('Loged in');
-    } else {
-        console.log('Logged Out');
-    }
-})
+const authState = () => {
+   return onAuthStateChanged(auth, (user) => {
+        if (user) {
+            return user;
+        } else {
+            console.log('Logged Out');
+            return undefined;
+        }
+    })
+}
 
-export { db, auth, imagesRef };
+export { db, auth, imagesRef, authState };
