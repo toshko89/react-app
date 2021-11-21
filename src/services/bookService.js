@@ -2,13 +2,15 @@ import { db, imagesRef } from "../utils/firebase.js";
 import { doc, collection, addDoc, getDoc, getDocs, onSnapshot, query } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const addBook = async (title, age, description, file) => {
+const addBook = async (title, author, age, description, file, ownerId) => {
     try {
         const imageRef = ref(imagesRef, file.name);
         await uploadBytes(imageRef, file);
         const imgUrl = await getDownloadURL(ref(imagesRef, file.name))
         const docRef = await addDoc(collection(db, "books"), {
+            ownerId,
             title,
+            author,
             age,
             description,
             likes: 0,
@@ -47,7 +49,7 @@ const booksSnapShot = async () => {
 
         return books;
     });
-    
+
     return currentBooks;
 }
 

@@ -1,23 +1,29 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router';
+import UserContext from '../context/userContext.js';
 import { addBook } from '../services/bookService.js';
 
 export default function AddBook() {
 
-  const [book, setBook] = useState({ title: '', age: '', description: '' });
+  const [book, setBook] = useState({ title: '', author: '', age: '', description: '' });
   const [file, setFile] = useState([]);
+  const { isLogedIn, userEmail, userId } = useContext(UserContext);
+  const navigate = useNavigate()
 
   const submitForm = async (e) => {
     e.preventDefault();
-    if (book.title.trim() === '' || book.age.trim() === '' || book.description.trim() === '') {
-      setBook({ title: '', age: '', description: '' });
+    if (book.title.trim() === '' || book.author.trim() === '' ||
+      book.age.trim() === '' || book.description.trim() === '') {
+      setBook({ title: '', author: '', age: '', description: '' });
       alert('All fields are required!');
       return;
     }
 
     try {
-      await addBook(book.title, book.age, book.description, file);
-      setBook({ title: '', age: '', description: '' });
+      await addBook(book.title, book.author, book.age, book.description, file, userId);
+      setBook({ title: '', author: '', age: '', description: '' });
       setFile([]);
+      navigate('/my-books');
     } catch (error) {
       console.log(error);
     }
@@ -45,6 +51,12 @@ export default function AddBook() {
                   <input type="text" name="title" className="form-control" id="name" placeholder="Title" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
                     value={book.title}
                     onChange={(e) => { setBook({ ...book, title: e.target.value }) }} />
+                  <div className="validation"></div>
+                </div>
+                <div className="form-group">
+                  <input type="text" name="author" className="form-control" id="subject" placeholder="Author" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
+                    value={book.author}
+                    onChange={(e) => { setBook({ ...book, author: e.target.value }) }} />
                   <div className="validation"></div>
                 </div>
                 <div className="form-group">

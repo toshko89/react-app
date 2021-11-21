@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getAllBooks } from "../services/bookService.js"
-import BookCard from './BooksCard.js';
+import BookCard from './BookCard.js';
 
 
 export default function Bookshelf() {

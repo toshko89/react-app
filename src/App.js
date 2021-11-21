@@ -31,8 +31,6 @@ function App() {
     userId: userData?.uid
   };
 
-  console.log(user);
-
   return (
     <>
       <UserContext.Provider value={user}>
