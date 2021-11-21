@@ -29,7 +29,9 @@ function App() {
     isLogedIn:Boolean(userData),
     userEmail: userData?.email,
     userId: userData?.uid
-  }
+  };
+
+  console.log(user);
 
   return (
     <>
