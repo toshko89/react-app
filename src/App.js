@@ -1,3 +1,4 @@
+import { onAuthStateChanged } from '@firebase/auth';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Header from './components/Header.js';
@@ -10,19 +11,25 @@ import Register from './components/Register.js';
 import Login from './components/Login.js';
 import ErrorPage from './components/ErrorPage.js'
 import UserContext from './context/userContext.js';
-import { authState } from './utils/firebase.js';
+import { auth } from './utils/firebase.js';
+import Logout from './components/Logout.js';
 
 
 function App() {
 
-  const [user, setUser] = useState(null);
- 
+  const [userData, setUser] = useState(null);
+
   useEffect(() => {
-    const userData = authState();
-    setUser(userData);
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    })
   }, []);
 
-  console.log(user);
+  const user = {
+    isLogedIn:Boolean(userData),
+    userEmail: userData?.email,
+    userId: userData?.uid
+  }
 
   return (
     <>
@@ -37,6 +44,7 @@ function App() {
           <Route path="/details/:bookId" element={<BookDetails />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/logout" element={<Logout />}></Route>
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes >
 
