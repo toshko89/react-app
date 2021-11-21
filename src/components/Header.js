@@ -49,8 +49,8 @@ export default function Header() {
                 <li className="menu-active"><Link to="/">Home</Link></li>
                 <li><NavLink to="/about-us">About</NavLink></li>
                 <li><NavLink to="/bookshelf">Bookshelf</NavLink></li>
-                <li><NavLink to="/register">Register</NavLink></li>
                 <li><NavLink to="/login">Login</NavLink></li>
+                <li><NavLink to="/register">Register</NavLink></li>
               </ul>
             </nav>
           </div>
