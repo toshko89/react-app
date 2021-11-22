@@ -9,11 +9,10 @@ export default function BookDetails() {
   const [book, setBook] = useState({});
 
   useEffect(() => {
-    async function fetchData() {
+    (async function fetchData() {
       const book = await getOne(params.bookId);
       setBook(book);
-    }
-    fetchData();
+    })();
   }, []);
 
   return (

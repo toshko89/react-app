@@ -13,6 +13,7 @@ export default function Login({ history }) {
       const userData = await login(user.email, user.password);
       setUser({ email: '', password: '' });
       if (userData.name !== "FirebaseError") {
+        sessionStorage.setItem('user', JSON.stringify(userData.uid));
         navigate('/bookshelf');
       }
     } catch (error) {
