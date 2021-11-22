@@ -1,5 +1,5 @@
 import { db, imagesRef } from "../utils/firebase.js";
-import { doc, collection, addDoc, getDoc, getDocs, onSnapshot, query, where } from "firebase/firestore";
+import { doc, collection, addDoc, getDoc, getDocs, onSnapshot, query, where, deleteDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const addBook = async (title, author, age, description, file, ownerId) => {
@@ -39,19 +39,19 @@ const getOne = async (bookId) => {
     return docSnap.data();
 }
 
-const booksSnapShot = async () => {
-    const q = query(collection(db, "books"));
-    const currentBooks = onSnapshot(q, (querySnapshot) => {
-        const books = [];
+const booksSnapShot = (userId) => {
+    const books = [];
+    const q = query(collection(db, "books"), where("ownerId", "==", userId));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            books.push(doc.data());
+            books.push({ id: doc.id, ...doc.data() });
         });
-
-        return books;
     });
-
-    return currentBooks;
+    // console.log(books);
+    return books;
 }
+
+// console.log(booksSnapShot('hd0yzyWet7f393MlK3idnXaa9qw2'));
 
 const getMyBooks = async (userId) => {
     const booksRef = collection(db, "books");
@@ -64,4 +64,8 @@ const getMyBooks = async (userId) => {
     return myBooks;
 }
 
-export { addBook, getAllBooks, getOne, booksSnapShot, getMyBooks }
+const deleteBook = async (bookId) => {
+    await deleteDoc(doc(db, "books", bookId));
+}
+
+export { addBook, getAllBooks, getOne, booksSnapShot, getMyBooks, deleteBook }

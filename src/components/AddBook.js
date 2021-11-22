@@ -7,7 +7,7 @@ export default function AddBook() {
 
   const [book, setBook] = useState({ title: '', author: '', age: '', description: '' });
   const [file, setFile] = useState([]);
-  const { isLogedIn, userEmail, userId } = useContext(UserContext);
+  const user = useContext(UserContext);
   const navigate = useNavigate()
 
   const submitForm = async (e) => {
@@ -20,7 +20,7 @@ export default function AddBook() {
     }
 
     try {
-      await addBook(book.title, book.author, book.age, book.description, file, userId);
+      await addBook(book.title, book.author, book.age, book.description, file, user.userId);
       setBook({ title: '', author: '', age: '', description: '' });
       setFile([]);
       navigate('/my-books');

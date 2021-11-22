@@ -42,7 +42,6 @@ export default function Bookshelf() {
           {books.length > 0
             ? books.map(book => <BookCard key={book.id} book={book} />)
             : spinner
-            // : <img src="img/kid-reading-a-book.jpg" className="center" alt="img" />
           }
         </div>
       </div>
