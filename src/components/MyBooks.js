@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import UserContext from "../context/userContext.js";
 import { getMyBooks } from "../services/bookService.js";
 import MyBooksCard from "./MyBooksCard.js";
@@ -7,7 +6,6 @@ import MyBooksCard from "./MyBooksCard.js";
 export default function MyBooks() {
 
   const { isLogedIn, userEmail, userId } = useContext(UserContext);
-  const navigate = useNavigate();
   const [myBooks, setMyBooks] = useState({});
 
   const userData = JSON.parse(sessionStorage.user) || userId;
@@ -26,6 +24,11 @@ export default function MyBooks() {
       <div className="container">
         <div className="section-title text-center">
           <h2>My Books</h2>
+          {
+            myBooks.length == 0
+              ? <p className="separator">No books yet</p>
+              : ''
+          }
         </div>
       </div>
 

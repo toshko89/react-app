@@ -1,31 +1,14 @@
-import { useState, useContext, useEffect } from "react";
-import { booksSnapShot, deleteBook, getMyBooks } from "../services/bookService.js";
-import UserContext from "../context/userContext.js";
-
+import { useNavigate } from "react-router";
+import { deleteBook} from "../services/bookService.js";
 
 export default function MyBooksCard({ bookId, book }) {
 
-  const { isLogedIn, userEmail, userId } = useContext(UserContext);
-  const [myBooks, setMyBooks] = useState([]);
-  const userData = JSON.parse(sessionStorage.user) || userId;
-
-  useEffect(() => {
-    (async function fetchData() {
-      const myBooks = await getMyBooks(userData);
-      setMyBooks(myBooks);
-    })();
-  }, []);
+  const navigate = useNavigate()
 
   async function deleteCurrentBook(e) {
     const bookId = e.target.parentElement.id;
     await deleteBook(bookId);
-    const change = booksSnapShot(userData);
-    console.log(change);
-    console.log(myBooks);
-    setMyBooks(change=>{
-      return {...change}
-    });
-    console.log(myBooks);
+    navigate('/bookshelf');
   }
 
   return (

@@ -30,9 +30,11 @@ export default function Bookshelf() {
         <div className="section-title text-center">
 
           <h2>Bookshelf</h2>
-          {books.length > 0
-            ? <p className="separator">Our Latest Arrivals</p>
-            : <p className="separator">No books yet</p>}
+          {
+            books.length > 0
+              ? <p className="separator">Our Latest Arrivals</p>
+              : <p className="separator">No books yet</p>
+          }
 
         </div>
       </div>

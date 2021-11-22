@@ -47,7 +47,6 @@ const booksSnapShot = (userId) => {
             books.push({ id: doc.id, ...doc.data() });
         });
     });
-    // console.log(books);
     return books;
 }
 
