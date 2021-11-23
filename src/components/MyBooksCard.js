@@ -1,19 +1,28 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router";
-import { deleteBook} from "../services/bookService.js";
+import UserContext from "../context/userContext.js";
+import { deleteBook } from "../services/bookService.js";
 
-export default function MyBooksCard({ bookId, book }) {
+export default function MyBooksCard({ bookId, book, setMyBooks }) {
 
-  const navigate = useNavigate()
+  const { isLogedIn, userEmail, userId } = useContext(UserContext);
+  const userData = sessionStorage.user || userId;
+  const navigate = useNavigate();
+
+  if (!userData) {
+    return navigate('/login');
+  }
 
   async function deleteCurrentBook(e) {
-    const bookId = e.target.parentElement.id;
+    console.log(e.target);
+    e.target.disabled = 'true';
     await deleteBook(bookId);
-    navigate('/bookshelf');
+    setMyBooks(oldValues => oldValues.filter(book => book.id !== bookId))
   }
 
   return (
     <div className="col-md-6 col-lg-4">
-      <div className="feature-block" id={bookId}>
+      <div className="feature-block" >
         <img src={book.img} alt="img" className="img-fluid" />
         <h4>{book.title}</h4>
         <p>{book.description}</p>

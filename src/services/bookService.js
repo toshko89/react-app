@@ -39,18 +39,16 @@ const getOne = async (bookId) => {
     return docSnap.data();
 }
 
-const booksSnapShot = (userId) => {
-    const books = [];
-    const q = query(collection(db, "books"), where("ownerId", "==", userId));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            books.push({ id: doc.id, ...doc.data() });
-        });
-    });
-    return books;
-}
-
-// console.log(booksSnapShot('hd0yzyWet7f393MlK3idnXaa9qw2'));
+// const booksSnapShot = (userId) => {
+//     const books = [];
+//     const q = query(collection(db, "books"), where("ownerId", "==", userId));
+//     const unsubscribe = onSnapshot(q, (querySnapshot) => {
+//         querySnapshot.forEach((doc) => {
+//             books.push({ id: doc.id, ...doc.data() });
+//         });
+//     });
+//     return books;
+// }
 
 const getMyBooks = async (userId) => {
     const booksRef = collection(db, "books");
@@ -67,4 +65,4 @@ const deleteBook = async (bookId) => {
     await deleteDoc(doc(db, "books", bookId));
 }
 
-export { addBook, getAllBooks, getOne, booksSnapShot, getMyBooks, deleteBook }
+export { addBook, getAllBooks, getOne, getMyBooks, deleteBook }
