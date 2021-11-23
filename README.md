@@ -1,8 +1,13 @@
-# Getting Started with Create React App
+# My first touch with React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+App for sharing kids books 
+I used Firebase Auth, Firestore as DB and Firebase Storage for saving files 
 
-## Available Scripts
+### Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+
+### Available Scripts
 
 In the project directory, you can run:
 
