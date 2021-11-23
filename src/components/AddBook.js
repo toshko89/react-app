@@ -21,6 +21,7 @@ export default function AddBook() {
     e.target.disabled = 'true';
     if (book.title.trim() === '' || book.author.trim() === '' ||
       book.age.trim() === '' || book.description.trim() === '') {
+      e.target.disabled = false;
       setBook({ title: '', author: '', age: '', description: '' });
       alert('All fields are required!');
       return;
@@ -28,14 +29,13 @@ export default function AddBook() {
 
     if (file.length === 0) {
       setBook({ title: '', author: '', age: '', description: '' });
+      e.target.disabled = false;
       alert('Please add file');
       return;
     }
 
     try {
       await addBook(book.title, book.author, book.age, book.description, file, user.userId);
-      setBook({ title: '', author: '', age: '', description: '' });
-      setFile([]);
       navigate('/my-books');
     } catch (error) {
       console.log(error);

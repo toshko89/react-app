@@ -1,5 +1,5 @@
 import { db, imagesRef, storage } from "../utils/firebase.js";
-import { doc, collection, addDoc, getDoc, getDocs, query, where, deleteDoc } from "firebase/firestore";
+import { doc, collection, addDoc, getDoc, getDocs, query, where, deleteDoc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
 const addBook = async (title, author, age, description, file, ownerId) => {
@@ -22,6 +22,30 @@ const addBook = async (title, author, age, description, file, ownerId) => {
         return docSnap.data();
     } catch (e) {
         console.error("Error adding document: ", e);
+        return e;
+    }
+}
+
+const updateBook = async (bookId, title, author, age, description, file) => {
+    try {
+        const docRef = doc(db, "books", bookId);
+        const imgName = file.name;
+        const imageRef = ref(imagesRef, imgName);
+        await uploadBytes(imageRef, file);
+        const imgUrl = await getDownloadURL(ref(imagesRef, imgName))
+        await updateDoc(docRef, {
+            title,
+            author,
+            age,
+            description,
+            likes: 0,
+            img: imgUrl,
+            imgName
+        });
+        const docSnap = await getDoc(docRef);
+        return docSnap.data();
+    } catch (e) {
+        console.error("Error updating document: ", e);
         return e;
     }
 }
@@ -63,6 +87,11 @@ const getMyBooks = async (userId) => {
     return myBooks;
 }
 
+const deleteOldImg = async (imgName) => {
+    const imgRef = ref(storage, imgName);
+    await deleteObject(imgRef);
+}
+
 const deleteBook = async (bookId, imgName) => {
     await deleteDoc(doc(db, "books", bookId));
     if (imgName) {
@@ -71,4 +100,4 @@ const deleteBook = async (bookId, imgName) => {
     }
 }
 
-export { addBook, getAllBooks, getOne, getMyBooks, deleteBook }
+export { addBook, getAllBooks, getOne, getMyBooks, deleteBook, updateBook, deleteOldImg }

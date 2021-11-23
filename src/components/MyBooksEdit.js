@@ -1,9 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
-
+import { deleteOldImg, getOne, updateBook } from "../services/bookService.js";
 import UserContext from "../context/userContext.js";
-import { getOne } from "../services/bookService.js";
-
 
 export default function MyBooksEdit() {
 
@@ -26,11 +24,32 @@ export default function MyBooksEdit() {
   }, [params.bookId]);
 
   console.log(book);
-
   const editBook = async (e) => {
     e.preventDefault();
     e.target.disabled = 'true';
 
+    if (book.title.trim() === '' || book.author.trim() === '' ||
+      book.age.trim() === '' || book.description.trim() === '') {
+      e.target.disabled = false;
+      setBook({ title: '', author: '', age: '', description: '' });
+      alert('All fields are required!');
+      return;
+    }
+
+    if (file.length === 0) {
+      e.target.disabled = false;
+      setBook({ title: '', author: '', age: '', description: '' });
+      alert('Please add file');
+      return;
+    }
+
+    try {
+      await deleteOldImg(book.img);
+      await updateBook(params.bookId, book.title, book.author, book.age, book.description, file);
+      navigate('/my-books');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const editFile = (e) => {
