@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import { login } from "../services/authService.js";
 
 export default function Login({ history }) {
@@ -47,8 +48,11 @@ export default function Login({ history }) {
                   />
                 </div>
                 <div className="text-center"><button className="btn btn-primary" type="submit">Sign in</button></div>
+                <p></p> 
               </form>
+              <p>Don't have an account yet?  <Link to="/register">Sign Up</Link> </p> 
             </div>
+            
           </div>
         </div>
       </div>
