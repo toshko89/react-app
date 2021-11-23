@@ -14,6 +14,7 @@ import Register from './components/Register.js';
 import Login from './components/Login.js';
 import Logout from './components/Logout.js';
 import ErrorPage from './components/ErrorPage.js'
+import MyBooksEdit from './components/MyBooksEdit.js';
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <Route path="/add-book" element={<AddBook />}></Route>
           <Route path="/bookshelf" element={<Bookshelf />}></Route>
           <Route path="/my-books" element={<MyBooks />}></Route>
+          <Route path="/my-books/:bookId/edit" element={<MyBooksEdit />}></Route>
           <Route path="/details/:bookId" element={<BookDetails />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>

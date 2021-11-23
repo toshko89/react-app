@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import UserContext from "../context/userContext.js";
 import { deleteBook } from "../services/bookService.js";
 
@@ -13,10 +14,12 @@ export default function MyBooksCard({ bookId, book, setMyBooks }) {
     return navigate('/login');
   }
 
+  console.log(book);
+
   async function deleteCurrentBook(e) {
     console.log(e.target);
     e.target.disabled = 'true';
-    await deleteBook(bookId);
+    await deleteBook(bookId,book.img);
     setMyBooks(oldValues => oldValues.filter(book => book.id !== bookId))
   }
 
@@ -31,7 +34,7 @@ export default function MyBooksCard({ bookId, book, setMyBooks }) {
           <li>Age: {book.age}</li>
           <li>Likes: {book.likes}</li>
         </ul>
-        <button type="button" className="btn btn-success">Edit</button>
+        <Link to={`/my-books/${bookId}/edit`} className="btn btn-success">Edit</Link>
         <button type="button" className="btn btn-danger" onClick={deleteCurrentBook}>Delete</button>
       </div>
     </div>

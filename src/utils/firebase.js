@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { getStorage, ref } from "firebase/storage";
 
 const firebaseConfig = initializeApp({
@@ -19,12 +19,4 @@ const auth = getAuth();
 const storage = getStorage(firebaseConfig);
 const imagesRef = ref(storage, 'images');
 
-// onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//         return console.log(user);;
-//     } else {
-//         console.log('Logged Out');
-//     }
-// });
-
-export { db, auth, imagesRef };
+export { db, auth, imagesRef, storage };

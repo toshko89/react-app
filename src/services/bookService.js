@@ -1,12 +1,13 @@
-import { db, imagesRef } from "../utils/firebase.js";
+import { db, imagesRef, storage } from "../utils/firebase.js";
 import { doc, collection, addDoc, getDoc, getDocs, onSnapshot, query, where, deleteDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
 const addBook = async (title, author, age, description, file, ownerId) => {
     try {
-        const imageRef = ref(imagesRef, file.name);
+        const imgName = file.name;
+        const imageRef = ref(imagesRef, imgName);
         await uploadBytes(imageRef, file);
-        const imgUrl = await getDownloadURL(ref(imagesRef, file.name))
+        const imgUrl = await getDownloadURL(ref(imagesRef, imgName))
         const docRef = await addDoc(collection(db, "books"), {
             ownerId,
             title,
@@ -14,7 +15,8 @@ const addBook = async (title, author, age, description, file, ownerId) => {
             age,
             description,
             likes: 0,
-            img: imgUrl
+            img: imgUrl,
+            imgName:imgName || ''
         });
         const docSnap = await getDoc(docRef);
         return docSnap.data();
@@ -61,8 +63,15 @@ const getMyBooks = async (userId) => {
     return myBooks;
 }
 
-const deleteBook = async (bookId) => {
+const deleteBook = async (bookId, imgName) => {
     await deleteDoc(doc(db, "books", bookId));
+    console.log(imgName);
+    if (imgName) {
+        const imgRef = ref(storage, imgName);
+        const ok = await deleteObject(imgRef);
+        console.log(ok);
+    }
+
 }
 
 export { addBook, getAllBooks, getOne, getMyBooks, deleteBook }

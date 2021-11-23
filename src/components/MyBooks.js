@@ -20,7 +20,7 @@ export default function MyBooks() {
       const myBooks = await getMyBooks(userData);
       setMyBooks(myBooks);
     })();
-  }, [userData]);
+  }, [userData,navigate]);
 
   return (
 
@@ -30,7 +30,7 @@ export default function MyBooks() {
         <div className="section-title text-center">
           <h2>My Books</h2>
           {
-            myBooks.length == 0
+            myBooks.length === 0
               ? <p className="separator">No books yet</p>
               : ''
           }

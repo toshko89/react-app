@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { getOne } from "../services/bookService.js";
 
 
@@ -13,7 +13,7 @@ export default function BookDetails() {
       const book = await getOne(params.bookId);
       setBook(book);
     })();
-  }, []);
+  }, [params.bookId]);
 
   return (
     <section id="about-us" className="about-us padd-section wow fadeInUp">
