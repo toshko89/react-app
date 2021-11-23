@@ -7,17 +7,15 @@ import { deleteBook } from "../services/bookService.js";
 export default function MyBooksCard({ bookId, book, setMyBooks }) {
 
   const { isLogedIn, userEmail, userId } = useContext(UserContext);
-  const userData = sessionStorage.user || userId;
   const navigate = useNavigate();
 
+  const userData = sessionStorage.user || userId;
+  
   if (!userData) {
     return navigate('/login');
   }
 
-  console.log(book);
-
   async function deleteCurrentBook(e) {
-    console.log(e.target);
     e.target.disabled = 'true';
     await deleteBook(bookId,book.img);
     setMyBooks(oldValues => oldValues.filter(book => book.id !== bookId))

@@ -73,7 +73,7 @@ export default function Register() {
                   />
                   <div className="validation"></div>
                 </div>
-                <div className="text-center"><button type="submit">Register</button></div>
+                <div className="text-center"><button className="btn btn-primary" type="submit">Register</button></div>
               </form>
             </div>
           </div>

@@ -8,14 +8,27 @@ export default function AddBook() {
   const [book, setBook] = useState({ title: '', author: '', age: '', description: '' });
   const [file, setFile] = useState([]);
   const user = useContext(UserContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const userData = sessionStorage.user || user.userId;
+
+  if (!userData) {
+    return navigate('/login');
+  }
 
   const submitForm = async (e) => {
     e.preventDefault();
+    e.target.disabled = 'true';
     if (book.title.trim() === '' || book.author.trim() === '' ||
       book.age.trim() === '' || book.description.trim() === '') {
       setBook({ title: '', author: '', age: '', description: '' });
       alert('All fields are required!');
+      return;
+    }
+
+    if (file.length === 0) {
+      setBook({ title: '', author: '', age: '', description: '' });
+      alert('Please add file');
       return;
     }
 

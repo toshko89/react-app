@@ -25,7 +25,7 @@ export default function Login({ history }) {
     <section id="contact" className="padd-section wow fadeInUp">
       <div className="container">
         <div className="section-title text-center">
-          <h2>Login</h2>
+          <h2>Sign in</h2>
         </div>
       </div>
 
@@ -46,7 +46,7 @@ export default function Login({ history }) {
                     onChange={(e) => setUser({ ...user, password: e.target.value })}
                   />
                 </div>
-                <div className="text-center"><button type="submit">Sign in</button></div>
+                <div className="text-center"><button className="btn btn-primary" type="submit">Sign in</button></div>
               </form>
             </div>
           </div>
@@ -54,6 +54,4 @@ export default function Login({ history }) {
       </div>
     </section>
   )
-
-
 }
