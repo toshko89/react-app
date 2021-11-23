@@ -1,9 +1,9 @@
 # My first touch with React
 
 App for sharing kids books 
-It used Firebase Auth, Firestore as DB and Firebase Storage for saving files 
+I used Firebase Auth, Firestore as DB and Firebase Storage for saving files 
 
-## Getting Started with Create React App
+### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
 
