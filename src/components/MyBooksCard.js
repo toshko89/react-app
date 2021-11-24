@@ -10,15 +10,20 @@ export default function MyBooksCard({ bookId, book, setMyBooks }) {
   const navigate = useNavigate();
 
   const userData = sessionStorage.user || userId;
-  
+
   if (!userData) {
     return navigate('/login');
   }
 
   async function deleteCurrentBook(e) {
-    e.target.disabled = 'true';
-    await deleteBook(bookId,book.img);
-    setMyBooks(oldValues => oldValues.filter(book => book.id !== bookId))
+    try {
+      e.target.disabled = 'true';
+      setMyBooks(oldValues => oldValues.filter(book => book.id !== bookId));
+      await deleteBook(bookId, book.img);
+    } catch (error) {
+      e.target.disabled = false;
+      console.log(error);
+    }
   }
 
   return (

@@ -44,8 +44,8 @@ export default function MyBooksEdit() {
     }
 
     try {
-      await deleteOldImg(book.img);
       await updateBook(params.bookId, book.title, book.author, book.age, book.description, file);
+      await deleteOldImg(book.img);
       navigate('/my-books');
     } catch (error) {
       console.log(error);

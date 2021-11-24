@@ -30,11 +30,13 @@ function login(email, password) {
 }
 
 function logout() {
-    const userData = signOut(auth).then(() => {
-        return 'Sign-out successful.';
-    }).catch((signUpError) => {
-        return signUpError.message;
-    });
+    const userData = signOut(auth)
+        .then(() => {
+            return 'Sign-out successful.';
+        })
+        .catch((signUpError) => {
+            return signUpError.message;
+        });
 
     return userData;
 }

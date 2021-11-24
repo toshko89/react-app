@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import UserContext from '../context/userContext.js';
 import { addBook } from '../services/bookService.js';
@@ -7,14 +7,15 @@ export default function AddBook() {
 
   const [book, setBook] = useState({ title: '', author: '', age: '', description: '' });
   const [file, setFile] = useState([]);
-  const user = useContext(UserContext);
+  const { isLogedIn, userEmail, userId } = useContext(UserContext);
   const navigate = useNavigate();
+  const userData = sessionStorage.user || userId;
 
-  const userData = sessionStorage.user || user.userId;
-
-  if (!userData) {
-    return navigate('/login');
-  }
+  useEffect(() => {
+    if (!userData) {
+      return navigate('/login');
+    }
+  }, [userData]);
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -35,7 +36,7 @@ export default function AddBook() {
     }
 
     try {
-      await addBook(book.title, book.author, book.age, book.description, file, user.userId);
+      await addBook(book.title, book.author, book.age, book.description, file, userId);
       navigate('/my-books');
     } catch (error) {
       console.log(error);

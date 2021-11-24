@@ -51,18 +51,28 @@ const updateBook = async (bookId, title, author, age, description, file) => {
 }
 
 const getAllBooks = async () => {
-    const querySnapshot = await getDocs(collection(db, "books"));
-    const allBooks = querySnapshot.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() }
-    });
+    try {
+        const querySnapshot = await getDocs(collection(db, "books"));
+        const allBooks = querySnapshot.docs.map((doc) => {
+            return { id: doc.id, ...doc.data() }
+        });
 
-    return allBooks;
+        return allBooks;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
 }
 
 const getOne = async (bookId) => {
-    const docRef = doc(db, "books", bookId);
-    const docSnap = await getDoc(docRef);
-    return docSnap.data();
+    try {
+        const docRef = doc(db, "books", bookId);
+        const docSnap = await getDoc(docRef);
+        return docSnap.data();
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
 }
 
 // const booksSnapShot = (userId) => {
@@ -77,26 +87,41 @@ const getOne = async (bookId) => {
 // }
 
 const getMyBooks = async (userId) => {
-    const booksRef = collection(db, "books");
-    const q = query(booksRef, where("ownerId", "==", userId));
-    const querySnapshot = await getDocs(q);
-    const myBooks = querySnapshot.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() }
-    });
+    try {
+        const booksRef = collection(db, "books");
+        const q = query(booksRef, where("ownerId", "==", userId));
+        const querySnapshot = await getDocs(q);
+        const myBooks = querySnapshot.docs.map((doc) => {
+            return { id: doc.id, ...doc.data() }
+        });
 
-    return myBooks;
+        return myBooks;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
 }
 
 const deleteOldImg = async (imgName) => {
-    const imgRef = ref(storage, imgName);
-    await deleteObject(imgRef);
+    try {
+        const imgRef = ref(storage, imgName);
+        await deleteObject(imgRef);
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
 }
 
 const deleteBook = async (bookId, imgName) => {
-    await deleteDoc(doc(db, "books", bookId));
-    if (imgName) {
-        const imgRef = ref(storage, imgName);
-        await deleteObject(imgRef);
+    try {
+        await deleteDoc(doc(db, "books", bookId));
+        if (imgName) {
+            const imgRef = ref(storage, imgName);
+            await deleteObject(imgRef);
+        }
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 }
 
