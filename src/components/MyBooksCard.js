@@ -6,15 +6,6 @@ import { deleteBook } from "../services/bookService.js";
 
 export default function MyBooksCard({ bookId, book, setMyBooks }) {
 
-  const { isLogedIn, userEmail, userId } = useContext(UserContext);
-  const navigate = useNavigate();
-
-  const userData = sessionStorage.user || userId;
-
-  if (!userData) {
-    return navigate('/login');
-  }
-
   async function deleteCurrentBook(e) {
     try {
       e.target.disabled = 'true';
