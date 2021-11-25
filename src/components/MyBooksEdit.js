@@ -23,7 +23,6 @@ export default function MyBooksEdit() {
     })();
   }, [params.bookId]);
 
-  console.log(book);
   const editBook = async (e) => {
     e.preventDefault();
     e.target.disabled = 'true';
@@ -44,11 +43,11 @@ export default function MyBooksEdit() {
     }
 
     try {
-      await updateBook(params.bookId, book.title, book.author, book.age, book.description, file);
       await deleteOldImg(book.img);
+      await updateBook(params.bookId, book.title, book.author, book.age, book.description, file);
       navigate('/my-books');
     } catch (error) {
-      console.log(error);
+      console.log(error.massega);
     }
   }
 
