@@ -1,5 +1,5 @@
 import { db, imagesRef, storage } from "../utils/firebase.js";
-import { doc, collection, addDoc, getDoc, getDocs, query, where, deleteDoc, updateDoc } from "firebase/firestore";
+import { doc, collection, addDoc, getDoc, getDocs, query, where, deleteDoc, updateDoc, increment } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
 const addBook = async (title, author, age, description, file, ownerId) => {
@@ -125,4 +125,16 @@ const deleteBook = async (bookId, imgName) => {
     }
 }
 
-export { addBook, getAllBooks, getOne, getMyBooks, deleteBook, updateBook, deleteOldImg }
+const likeBook = async (bookId) => {
+    const bookRef = doc(db, "books", bookId);
+    try {
+        await updateDoc(bookRef, {
+            likes: increment(1)
+        });
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+}
+
+export { addBook, getAllBooks, getOne, getMyBooks, deleteBook, updateBook, deleteOldImg, likeBook }

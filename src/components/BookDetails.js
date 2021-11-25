@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getOne } from "../services/bookService.js";
+import { getOne, likeBook } from "../services/bookService.js";
 
 
 export default function BookDetails() {
@@ -14,6 +14,18 @@ export default function BookDetails() {
       setBook(book);
     })();
   }, [params.bookId]);
+
+  const like = async (e) => {
+    e.target.disabled = 'true';
+    try {
+      await likeBook(params.bookId);
+      setBook(oldValue=>{
+        return { ...book, likes: oldValue.likes + 1 }
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <section id="about-us" className="about-us padd-section wow fadeInUp">
@@ -38,7 +50,7 @@ export default function BookDetails() {
               <li><i className="fa fa-angle-right"></i>Unlimited Features</li>
               <li><i className="fa fa-angle-right"></i>Unlimited Features</li> */}
               </ul>
-
+              <button type="button" className="btn btn-success px-3" onClick={like}><i className="far fa-thumbs-up" aria-hidden="true"></i></button>
             </div>
           </div>
 
