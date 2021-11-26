@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getOne, likeBook } from "../services/bookService.js";
+import { disLikeBook, getOne, likeBook } from "../services/bookService.js";
+import UserContext from '../context/userContext.js';
 
 
 export default function BookDetails() {
 
+  const user = useContext(UserContext);
   const params = useParams();
   const [book, setBook] = useState({});
 
@@ -12,15 +14,45 @@ export default function BookDetails() {
     (async function fetchData() {
       const book = await getOne(params.bookId);
       setBook(book);
+      // const l = canLike(user, book);
+      // console.log(l);
     })();
   }, [params.bookId]);
+  console.log(book);
+  console.log(book.totalLikes);
+
+  // const canLike = (user, book) => {
+  //   const isAuth = true;
+  //   if (!user) {
+  //     isAuth = false;
+  //     return;
+  //   } else if (book.totalLikes.some(id => id == user.userId)) {
+  //     isAuth = false;
+  //     return;
+  //   } else if (book.ownerId == user.userId) {
+  //     isAuth = false;
+  //     return;
+  //   }
+  //   return isAuth;
+  // }
+
 
   const like = async (e) => {
-    e.target.disabled = 'true';
     try {
-      await likeBook(params.bookId);
-      setBook(oldValue=>{
-        return { ...book, likes: oldValue.likes + 1 }
+      await likeBook(params.bookId, user.userId);
+      setBook(oldValue => {
+        return { ...book, likes: oldValue.likes + 1, totalLikes: [...book.totalLikes, user.userId] }
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const disLike = async (e) => {
+    try {
+      await disLikeBook(params.bookId, user.userId);
+      setBook(oldValue => {
+        return { ...book, likes: oldValue.likes - 1, totalLikes: [...book.totalLikes, user.userId] }
       })
     } catch (error) {
       console.log(error);
@@ -50,7 +82,14 @@ export default function BookDetails() {
               <li><i className="fa fa-angle-right"></i>Unlimited Features</li>
               <li><i className="fa fa-angle-right"></i>Unlimited Features</li> */}
               </ul>
-              <button type="button" className="btn btn-success px-3" onClick={like}><i className="far fa-thumbs-up" aria-hidden="true"></i></button>
+
+              <div id="likes">
+                <button type="button" className="btn btn-success px-3" onClick={like}><i className="far fa-thumbs-up" aria-hidden="true"></i></button>
+                <button type="button" className="btn btn-danger px-3" onClick={disLike}><i className="far fa-thumbs-down" aria-hidden="true"></i></button>
+              </div>
+
+
+
             </div>
           </div>
 

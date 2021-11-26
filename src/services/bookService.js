@@ -1,5 +1,5 @@
 import { db, imagesRef, storage } from "../utils/firebase.js";
-import { doc, collection, addDoc, getDoc, getDocs, query, where, deleteDoc, updateDoc, increment } from "firebase/firestore";
+import { doc, collection, addDoc, getDoc, getDocs, query, where, deleteDoc, updateDoc, increment, arrayUnion } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
 const addBook = async (title, author, age, description, file, ownerId) => {
@@ -15,6 +15,7 @@ const addBook = async (title, author, age, description, file, ownerId) => {
             age,
             description,
             likes: 0,
+            totalLikes: [],
             img: imgUrl,
             imgName
         });
@@ -38,7 +39,6 @@ const updateBook = async (bookId, title, author, age, description, file) => {
             author,
             age,
             description,
-            likes: 0,
             img: imgUrl,
             imgName
         });
@@ -125,11 +125,12 @@ const deleteBook = async (bookId, imgName) => {
     }
 }
 
-const likeBook = async (bookId) => {
+const likeBook = async (bookId, userId) => {
     const bookRef = doc(db, "books", bookId);
     try {
         await updateDoc(bookRef, {
-            likes: increment(1)
+            likes: increment(1),
+            totalLikes: arrayUnion(userId)
         });
     } catch (error) {
         console.log(error);
@@ -137,4 +138,17 @@ const likeBook = async (bookId) => {
     }
 }
 
-export { addBook, getAllBooks, getOne, getMyBooks, deleteBook, updateBook, deleteOldImg, likeBook }
+const disLikeBook = async (bookId,userId) => {
+    const bookRef = doc(db, "books", bookId);
+    try {
+        await updateDoc(bookRef, {
+            likes: increment(-1),
+            totalLikes: arrayUnion(userId)
+        });
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+}
+
+export { addBook, getAllBooks, getOne, getMyBooks, deleteBook, updateBook, deleteOldImg, likeBook, disLikeBook }
