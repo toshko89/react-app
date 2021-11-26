@@ -14,29 +14,22 @@ export default function BookDetails() {
     (async function fetchData() {
       const book = await getOne(params.bookId);
       setBook(book);
-      // const l = canLike(user, book);
-      // console.log(l);
     })();
   }, [params.bookId]);
-  console.log(book);
-  console.log(book.totalLikes);
 
-  // const canLike = (user, book) => {
-  //   const isAuth = true;
-  //   if (!user) {
-  //     isAuth = false;
-  //     return;
-  //   } else if (book.totalLikes.some(id => id == user.userId)) {
-  //     isAuth = false;
-  //     return;
-  //   } else if (book.ownerId == user.userId) {
-  //     isAuth = false;
-  //     return;
-  //   }
-  //   return isAuth;
-  // }
+  const canLike = (user, book) => {
+    if (user.isLogedIn = false) {
+      return false;
+    } else if (book.totalLikes.some(x => x == user.userId)) {
+      return false;
+    } else if (book.ownerId == user.userId) {
+      return false;
+    }
+    return true;
+  }
 
-
+  console.log(book.totalLikes.find(x => x !== user.userId));
+  
   const like = async (e) => {
     try {
       await likeBook(params.bookId, user.userId);
@@ -78,18 +71,15 @@ export default function BookDetails() {
                 <li><i className="fa fa-angle-right"></i>Author: {book.author}</li>
                 <li><i className="fa fa-angle-right"></i>Age: {book.age}</li>
                 <li><i className="fa fa-angle-right"></i>Likes: {book.likes}</li>
-                {/* <li><i className="fa fa-angle-right"></i>Easy to Use</li>
-              <li><i className="fa fa-angle-right"></i>Unlimited Features</li>
-              <li><i className="fa fa-angle-right"></i>Unlimited Features</li> */}
               </ul>
-
-              <div id="likes">
-                <button type="button" className="btn btn-success px-3" onClick={like}><i className="far fa-thumbs-up" aria-hidden="true"></i></button>
-                <button type="button" className="btn btn-danger px-3" onClick={disLike}><i className="far fa-thumbs-down" aria-hidden="true"></i></button>
-              </div>
-
-
-
+              {user.isLogedIn && user.userId !== book.ownerId
+                ?
+                <div id="likes">
+                  <button type="button" className="btn btn-success px-3" onClick={like}><i className="far fa-thumbs-up" aria-hidden="true"></i></button>
+                  <button type="button" className="btn btn-danger px-3" onClick={disLike}><i className="far fa-thumbs-down" aria-hidden="true"></i></button>
+                </div>
+                : ''
+              }
             </div>
           </div>
 
