@@ -11,7 +11,6 @@ export default function BookDetails() {
   const [canLike, setCanLike] = useState(true);
   const params = useParams();
 
-
   useEffect(() => {
     (async function fetchData() {
       const book = await getOne(params.bookId);

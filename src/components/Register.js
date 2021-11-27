@@ -5,6 +5,7 @@ import { registerUser } from "../services/authService.js";
 export default function Register() {
 
   const [user, setUser] = useState({ email: '', password: '', rePass: '' });
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -13,29 +14,28 @@ export default function Register() {
   const register = async (e) => {
     e.preventDefault();
     if (!regExForEmail.test(user.email)) {
-      alert('Please enter a valid email');
+      setError('Please enter a valid email');
       setUser({ email: '', password: '', rePass: '' });
       return;
     } else if (user.password.length < 6) {
-      alert('Please enter at least 6 chars for password');
+      setError('Please enter at least 6 chars for password');
       setUser({ ...user, password: '', rePass: '' });
       return;
     } else if (user.password !== user.rePass) {
-      alert('Password doesn\'t match');
+      setError('Password doesn\'t match');
       setUser({ ...user, password: '', rePass: '' });
       return;
     }
 
     try {
       const userData = await registerUser(user.email, user.password);
+      console.log(userData);
       setUser({ email: '', password: '', rePass: '' });
-      if (userData.name !== "FirebaseError") {
-        sessionStorage.setItem('user', userData.uid);
-        navigate('/bookshelf');
-      }
-
-    } catch (signUpError) {
-      console.log(signUpError);
+      sessionStorage.setItem('user', userData.uid);
+      navigate('/bookshelf');
+    } catch (error) {
+      setUser({ email: '', password: '', rePass: '' });
+      setError(error.message);
     }
   }
 
@@ -46,7 +46,7 @@ export default function Register() {
           <h2>Register</h2>
         </div>
       </div>
-
+      {error && <div className="error-container" role="alert"><p>{error}</p></div>}
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-5 col-md-8">
@@ -56,6 +56,7 @@ export default function Register() {
                   <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email"
                     value={user.email}
                     onChange={(e) => setUser({ ...user, email: e.target.value })}
+                    onBlur={() => setError(null)}
                   />
                   <div className="validation"></div>
                 </div>
@@ -63,6 +64,7 @@ export default function Register() {
                   <input type="password" autoComplete="on" className="form-control" name="password" id="name" placeholder="Password" data-rule="minlen:6" data-msg="Please enter at least 6 chars for password"
                     value={user.password}
                     onChange={(e) => setUser({ ...user, password: e.target.value })}
+                    onBlur={() => setError(null)}
                   />
                   <div className="validation"></div>
                 </div>
@@ -70,6 +72,7 @@ export default function Register() {
                   <input type="password" autoComplete="on" className="form-control" name="rePass" id="subject" placeholder="Confirm Password" data-rule="minlen:6" data-msg="Please enter at least 6 chars for password"
                     value={user.rePass}
                     onChange={(e) => setUser({ ...user, rePass: e.target.value })}
+                    onBlur={() => setError(null)}
                   />
                   <div className="validation"></div>
                 </div>

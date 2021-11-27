@@ -8,8 +8,15 @@ function registerUser(email, password) {
             return user;
         })
         .catch((signUpError) => {
-            alert(signUpError.message);
-            return signUpError;
+            if (signUpError.code === 'auth/email-already-in-use') {
+                throw Error('Email taken, please chose diffrent email');
+            } else if (signUpError.code === 'auth/invalid-email') {
+                throw Error('Please provide a valid email');
+            } else if (signUpError.code === 'auth/weak-password') {
+                throw Error('The password is too weak.');
+            } else {
+                throw Error(signUpError.code);
+            }
         });
 
     return userData;
@@ -22,8 +29,14 @@ function login(email, password) {
             return user;
         })
         .catch((signUpError) => {
-            alert('Wrong user name or password');
-            return signUpError;
+            if (signUpError.code === 'auth/wrong-password') {
+                throw Error('Wrong username or password')
+            } else if (signUpError.code === 'auth/user-not-found'){
+                throw Error('Wrong username or password')
+            }else{
+                throw Error(signUpError.code);
+            }
+                
         });
 
     return userData;
