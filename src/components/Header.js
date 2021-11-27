@@ -28,11 +28,11 @@ export default function Header() {
               <ul className="nav-menu">
                 <li><NavLink to="/my-books">Welcome, {userEmail}!</NavLink></li>
                 <li className="menu-active"><Link to="/">Home</Link></li>
-                <li><NavLink to="/about-us">About</NavLink></li>
                 <li><NavLink to="/bookshelf">Bookshelf</NavLink></li>
                 <li><NavLink to="/my-books">My books</NavLink></li>
                 <li><NavLink to="/add-book">Add Book</NavLink></li>
                 <li><NavLink to="/logout">Logout</NavLink></li>
+                <li><NavLink to="/about-us">About</NavLink></li>
               </ul>
             </nav>
           </div>
@@ -47,10 +47,10 @@ export default function Header() {
               <ul className="nav-menu">
                 <li><NavLink to="/login">Welcome, Guest!</NavLink></li>
                 <li className="menu-active"><Link to="/">Home</Link></li>
-                <li><NavLink to="/about-us">About</NavLink></li>
                 <li><NavLink to="/bookshelf">Bookshelf</NavLink></li>
                 <li><NavLink to="/login">Login</NavLink></li>
                 <li><NavLink to="/register">Register</NavLink></li>
+                <li><NavLink to="/about-us">About</NavLink></li>
               </ul>
             </nav>
           </div>
