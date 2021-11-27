@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   const user = {
-    isLogedIn: Boolean(userData),
+    isLoggedIn : Boolean(userData),
     userEmail: userData?.email,
     userId: userData?.uid
   };

@@ -21,7 +21,7 @@ export default function MyBooksEdit() {
       const book = await getOne(params.bookId);
       setBook(book);
     })();
-  }, [userData]);
+  }, [userData,params.bookId,navigate]);
 
   const editBook = async (e) => {
     e.preventDefault();

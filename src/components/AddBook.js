@@ -7,9 +7,9 @@ export default function AddBook() {
 
   const [book, setBook] = useState({ title: '', author: '', age: '', description: '' });
   const [file, setFile] = useState([]);
-  const { isLogedIn, userEmail, userId } = useContext(UserContext);
+  const user = useContext(UserContext);
   const navigate = useNavigate();
-  const userData = sessionStorage.user || userId;
+  const userData = sessionStorage.user || user.userId;
 
   useEffect(() => {
     if (!userData) {
@@ -36,7 +36,7 @@ export default function AddBook() {
     }
 
     try {
-      await addBook(book.title, book.author, book.age, book.description, file, userId);
+      await addBook(book.title, book.author, book.age, book.description, file, user.userId);
       navigate('/my-books');
     } catch (error) {
       console.log(error);

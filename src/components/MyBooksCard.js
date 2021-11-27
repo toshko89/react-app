@@ -1,7 +1,4 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import UserContext from "../context/userContext.js";
 import { deleteBook } from "../services/bookService.js";
 
 export default function MyBooksCard({ bookId, book, setMyBooks }) {

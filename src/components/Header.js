@@ -7,17 +7,17 @@ import UserContext from "../context/userContext.js";
 
 export default function Header() {
 
-  const { isLogedIn, userEmail } = useContext(UserContext);
+  const { isLoggedIn, userEmail } = useContext(UserContext);
 
   useEffect(() => {
-    if (!isLogedIn) {
+    if (!isLoggedIn) {
       return;
     }
-  }, [isLogedIn])
+  }, [isLoggedIn])
 
   return (
     <>
-      {isLogedIn
+      {isLoggedIn
         ?
         (<header id="header" className="header header-hide">
           <div className="container">

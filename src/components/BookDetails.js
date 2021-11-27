@@ -7,32 +7,26 @@ import UserContext from '../context/userContext.js';
 export default function BookDetails() {
 
   const user = useContext(UserContext);
-  const params = useParams();
   const [book, setBook] = useState({});
+  const [canLike, setCanLike] = useState(true);
+  const params = useParams();
+
 
   useEffect(() => {
     (async function fetchData() {
       const book = await getOne(params.bookId);
       setBook(book);
+      const currentUserLiked = book.totalLikes.some(id => id === user.userId);
+      if (currentUserLiked) {
+        setCanLike(false);
+      }
     })();
   }, [params.bookId]);
 
-  const canLike = (user, book) => {
-    if (user.isLogedIn = false) {
-      return false;
-    } else if (book.totalLikes.some(x => x == user.userId)) {
-      return false;
-    } else if (book.ownerId == user.userId) {
-      return false;
-    }
-    return true;
-  }
-
-  console.log(book.totalLikes.find(x => x !== user.userId));
-  
   const like = async (e) => {
     try {
       await likeBook(params.bookId, user.userId);
+      setCanLike(false);
       setBook(oldValue => {
         return { ...book, likes: oldValue.likes + 1, totalLikes: [...book.totalLikes, user.userId] }
       })
@@ -44,6 +38,7 @@ export default function BookDetails() {
   const disLike = async (e) => {
     try {
       await disLikeBook(params.bookId, user.userId);
+      setCanLike(false);
       setBook(oldValue => {
         return { ...book, likes: oldValue.likes - 1, totalLikes: [...book.totalLikes, user.userId] }
       })
@@ -72,7 +67,7 @@ export default function BookDetails() {
                 <li><i className="fa fa-angle-right"></i>Age: {book.age}</li>
                 <li><i className="fa fa-angle-right"></i>Likes: {book.likes}</li>
               </ul>
-              {user.isLogedIn && user.userId !== book.ownerId
+              {(user.isLoggedIn && user.userId !== book.ownerId && canLike)
                 ?
                 <div id="likes">
                   <button type="button" className="btn btn-success px-3" onClick={like}><i className="far fa-thumbs-up" aria-hidden="true"></i></button>
