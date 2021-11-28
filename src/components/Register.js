@@ -29,7 +29,6 @@ export default function Register() {
 
     try {
       const userData = await registerUser(user.email, user.password);
-      console.log(userData);
       setUser({ email: '', password: '', rePass: '' });
       sessionStorage.setItem('user', userData.uid);
       navigate('/bookshelf');

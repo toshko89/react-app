@@ -31,12 +31,12 @@ function login(email, password) {
         .catch((signUpError) => {
             if (signUpError.code === 'auth/wrong-password') {
                 throw Error('Wrong username or password')
-            } else if (signUpError.code === 'auth/user-not-found'){
+            } else if (signUpError.code === 'auth/user-not-found') {
                 throw Error('Wrong username or password')
-            }else{
+            } else {
                 throw Error(signUpError.code);
             }
-                
+
         });
 
     return userData;
@@ -48,7 +48,7 @@ function logout() {
             return 'Sign-out successful.';
         })
         .catch((signUpError) => {
-            return signUpError.message;
+            throw Error(signUpError.message);
         });
 
     return userData;
