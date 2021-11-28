@@ -21,9 +21,9 @@ const addBook = async (title, author, age, description, file, ownerId) => {
         });
         const docSnap = await getDoc(docRef);
         return docSnap.data();
-    } catch (e) {
-        console.error("Error adding document: ", e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        throw Error(error);
     }
 }
 
@@ -44,9 +44,9 @@ const updateBook = async (bookId, title, author, age, description, file) => {
         });
         const docSnap = await getDoc(docRef);
         return docSnap.data();
-    } catch (e) {
-        console.error("Error updating document: ", e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        throw Error(error);
     }
 }
 
@@ -60,7 +60,7 @@ const getAllBooks = async () => {
         return allBooks;
     } catch (error) {
         console.log(error);
-        return error;
+        throw Error(error);
     }
 }
 
@@ -71,7 +71,7 @@ const getOne = async (bookId) => {
         return docSnap.data();
     } catch (error) {
         console.log(error);
-        return error;
+        throw Error(error);
     }
 }
 
@@ -98,7 +98,7 @@ const getMyBooks = async (userId) => {
         return myBooks;
     } catch (error) {
         console.log(error);
-        return error;
+        throw Error(error);
     }
 }
 
@@ -108,7 +108,7 @@ const deleteOldImg = async (imgName) => {
         await deleteObject(imgRef);
     } catch (error) {
         console.log(error);
-        return error;
+        throw Error(error);
     }
 }
 
@@ -121,7 +121,7 @@ const deleteBook = async (bookId, imgName) => {
         }
     } catch (error) {
         console.log(error);
-        return error;
+        throw Error(error);
     }
 }
 
@@ -134,11 +134,11 @@ const likeBook = async (bookId, userId) => {
         });
     } catch (error) {
         console.log(error);
-        return error;
+        throw Error(error);
     }
 }
 
-const disLikeBook = async (bookId,userId) => {
+const disLikeBook = async (bookId, userId) => {
     const bookRef = doc(db, "books", bookId);
     try {
         await updateDoc(bookRef, {
@@ -147,7 +147,7 @@ const disLikeBook = async (bookId,userId) => {
         });
     } catch (error) {
         console.log(error);
-        return error;
+        throw Error(error);
     }
 }
 
