@@ -15,6 +15,8 @@ import Login from './components/Login.js';
 import Logout from './components/Logout.js';
 import ErrorPage from './components/ErrorPage.js'
 import MyBooksEdit from './components/MyBooksEdit.js';
+import AboutUs from './components/AboutUs.js';
+import AboutMe from './components/AboutMe.js';
 
 
 function App() {
@@ -49,6 +51,8 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/logout" element={<Logout />}></Route>
+          <Route path="/about-us" element={<AboutUs />}></Route>
+          <Route path="/about-me" element={<AboutMe />}></Route>
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes >
 
