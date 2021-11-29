@@ -1,14 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { addToWishList, disLikeBook, getOne, likeBook } from "../services/bookService.js";
+import { disLikeBook, getOne, likeBook } from "../services/bookService.js";
 import UserContext from '../context/userContext.js';
-
 
 export default function BookDetails() {
 
   const user = useContext(UserContext);
   const [book, setBook] = useState({});
-  const [wishList, setWishList] = useState({});
   const [canLike, setCanLike] = useState(true);
   const params = useParams();
 
@@ -47,15 +45,6 @@ export default function BookDetails() {
     }
   }
 
-  const addWishList = async (e) => {
-    try {
-      await addToWishList(user.userId, params.bookId);
-    } catch (error) {
-      console.log(error);
-    }
-
-  }
-
   return (
     <section id="about-us" className="about-us padd-section wow fadeInUp">
       <div className="container">
@@ -63,13 +52,6 @@ export default function BookDetails() {
 
           <div className="col-md-5 col-lg-3">
             <img src={book.img} alt="About" />
-            {
-              (user.isLoggedIn && user.userId !== book.ownerId)
-                ?
-                <div className="text-center"><button onClick={addWishList} className="btn btn-info" >Add to Wish List</button></div>
-                : ''
-            }
-
           </div>
 
           <div className="col-md-7 col-lg-5">

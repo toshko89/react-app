@@ -1,5 +1,5 @@
 import { db, imagesRef, storage } from "../utils/firebase.js";
-import { doc, collection, addDoc, getDoc, getDocs, query, where, deleteDoc, updateDoc, increment, arrayUnion } from "firebase/firestore";
+import { doc, collection, addDoc, getDoc, getDocs, query, where, deleteDoc, updateDoc, increment, arrayUnion, documentId } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
 const addBook = async (title, author, age, description, file, ownerId) => {
@@ -151,33 +151,6 @@ const disLikeBook = async (bookId, userId) => {
     }
 }
 
-const addToWishList = async (userId, bookId) => {
-    const userRef = doc(db, "users", userId);
-    try {
-        await updateDoc(userRef, {
-            wishlist: arrayUnion(bookId)
-        });
-    } catch (error) {
-        console.log(error);
-        throw Error(error);
-    }
-}
-
-// const addToWishList = async (userId, bookId) => {
-//     const userRef = query(collection(db, "users"), where("userId", "==", userId));
-//     try {
-//         const querySnapshot = await getDocs(userRef);
-//         querySnapshot.forEach((doc) => {
-//             updateDoc(doc.ref, {
-//                 wishlist: arrayUnion(bookId)
-//             })
-//         });
-//     } catch (error) {
-//         console.log(error);
-//         throw Error(error);
-//     }
-// }
-
 export {
     addBook,
     getAllBooks,
@@ -187,6 +160,5 @@ export {
     updateBook,
     deleteOldImg,
     likeBook,
-    disLikeBook,
-    addToWishList
+    disLikeBook
 }

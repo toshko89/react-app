@@ -18,14 +18,12 @@ import MyBooksEdit from './components/MyBooksEdit.js';
 import AboutUs from './components/AboutUs.js';
 import AboutMe from './components/AboutMe.js';
 
-
 function App() {
 
   const [userData, setUser] = useState(null);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log(user);
       setUser(user);
     })
   }, []);
