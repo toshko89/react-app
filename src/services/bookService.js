@@ -151,4 +151,42 @@ const disLikeBook = async (bookId, userId) => {
     }
 }
 
-export { addBook, getAllBooks, getOne, getMyBooks, deleteBook, updateBook, deleteOldImg, likeBook, disLikeBook }
+const addToWishList = async (userId, bookId) => {
+    const userRef = doc(db, "users", userId);
+    try {
+        await updateDoc(userRef, {
+            wishlist: arrayUnion(bookId)
+        });
+    } catch (error) {
+        console.log(error);
+        throw Error(error);
+    }
+}
+
+// const addToWishList = async (userId, bookId) => {
+//     const userRef = query(collection(db, "users"), where("userId", "==", userId));
+//     try {
+//         const querySnapshot = await getDocs(userRef);
+//         querySnapshot.forEach((doc) => {
+//             updateDoc(doc.ref, {
+//                 wishlist: arrayUnion(bookId)
+//             })
+//         });
+//     } catch (error) {
+//         console.log(error);
+//         throw Error(error);
+//     }
+// }
+
+export {
+    addBook,
+    getAllBooks,
+    getOne,
+    getMyBooks,
+    deleteBook,
+    updateBook,
+    deleteOldImg,
+    likeBook,
+    disLikeBook,
+    addToWishList
+}

@@ -25,12 +25,13 @@ function App() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      console.log(user);
       setUser(user);
     })
   }, []);
 
   const user = {
-    isLoggedIn : Boolean(userData),
+    isLoggedIn: Boolean(userData),
     userEmail: userData?.email,
     userId: userData?.uid
   };
