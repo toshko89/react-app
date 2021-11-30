@@ -1,6 +1,8 @@
 import { db, imagesRef, storage } from "../utils/firebase.js";
-import { doc, collection, addDoc, getDoc, getDocs, query, where, deleteDoc, updateDoc, increment, arrayUnion, documentId } from "firebase/firestore";
+import { doc, collection, addDoc, getDoc, getDocs, query, where, deleteDoc, updateDoc, increment, arrayUnion } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+
+//documentId -> looking for document id
 
 const addBook = async (title, author, age, description, file, ownerId) => {
     try {
