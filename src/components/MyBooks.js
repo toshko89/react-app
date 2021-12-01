@@ -20,7 +20,7 @@ export default function MyBooks() {
       const myBooks = await getMyBooks(userData);
       setMyBooks(myBooks);
     })();
-  }, [userData,navigate]);
+  }, [userData]);
 
   return (
 
