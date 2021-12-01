@@ -15,7 +15,7 @@ export default function AboutMe() {
             <div className="team-block bottom">
               <img src="img/team/IMG_7579.jpg" className="img-responsive" alt="img" />
               <div className="team-content">
-                <p>Platform for sharing children's books, using Firebase auth, storage and Firestore as DB.</p>
+                <p>Platform for sharing children's books, using Firebase auth, Fire storage and Firestore as DB.</p>
                 <span>creator</span>
                 <h4>Todor Petkov</h4>
               </div>
