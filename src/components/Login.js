@@ -5,20 +5,21 @@ import { login } from "../services/authService.js";
 
 export default function Login() {
 
-  const [user, setUser] = useState({ email: '', password: '' });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const signIn = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email');
+    const password = formData.get('password');
+
     try {
-      const userData = await login(user.email, user.password);
-      setUser({ email: '', password: '' });
-      setError(null);
+      const userData = await login(email, password);
       sessionStorage.setItem('user', userData.uid);
       navigate('/bookshelf');
     } catch (error) {
-      setUser({ email: '', password: '' });
       setError(error.message);
     }
   }
@@ -38,15 +39,11 @@ export default function Login() {
               <form className="contactForm" onSubmit={signIn}>
                 <div className="form-group">
                   <input type="email" className="form-control" name="email" id="email" placeholder="Your Email"
-                    value={user.email}
-                    onChange={(e) => setUser({ ...user, email: e.target.value })}
                     onBlur={() => setError(null)}
                   />
                 </div>
                 <div className="form-group">
-                  <input type="password" autoComplete="on" className="form-control" name="subject" id="subject" placeholder="Password"
-                    value={user.password}
-                    onChange={(e) => setUser({ ...user, password: e.target.value })}
+                  <input type="password" autoComplete="on" className="form-control" name="password" id="subject" placeholder="Password"
                     onBlur={() => setError(null)}
                   />
                 </div>
@@ -55,7 +52,6 @@ export default function Login() {
               </form>
               <p>Don't have an account yet?  <Link to="/register">Sign Up</Link> </p>
             </div>
-
           </div>
         </div>
       </div>
