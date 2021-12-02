@@ -14,11 +14,13 @@ export default function Bookshelf() {
     fetchData();
   }, []);
 
-  const spinner = <div className="d-flex justify-content-center">
-    <div className="spinner-border" role="status">
-      <span className="visually-hidden">Loading...</span>
+  const spinner = (
+    <div className="d-flex justify-content-center">
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
     </div>
-  </div>
+  )
 
   return (
     <section id="blog" className="padd-section wow fadeInUp">
@@ -27,8 +29,23 @@ export default function Bookshelf() {
           <h2>Bookshelf</h2>
           {
             books.length > 0
-              ? <p className="separator">Our Latest Arrivals</p>
-              : <p className="separator">No books yet</p>
+              ?
+              <>
+                <div className="d-flex justify-content-center">
+                  <div className="col-sm-3 my-1">
+                    <input type="number" name="searched" className="form-control" id="inlineFormInputName"
+                      placeholder="Search for book by age"
+                      onChange={(e) => books
+                        .filter(book => book.age == e.target.value)
+                        .map(book => <BookCard key={book.id} book={book} />)
+                      } />
+                  </div>
+                  <span className="input-group-text border-0" id="search-addon">
+                    <i className="fas fa-search"></i>
+                  </span>
+                </div>
+              </>
+              : <h3 className="separator">No books yet</h3>
           }
         </div>
       </div>
