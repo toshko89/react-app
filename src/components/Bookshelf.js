@@ -5,6 +5,7 @@ import BookCard from './BookCard.js';
 export default function Bookshelf() {
 
   const [books, setBooks] = useState({});
+  const [search, setSeatch] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -13,6 +14,11 @@ export default function Bookshelf() {
     }
     fetchData();
   }, []);
+
+  const searchBook = (e) => {
+    const searched = books.filter(book => book.age == e.target.value);
+    setSeatch(searched);
+  }
 
   const spinner = (
     <div className="d-flex justify-content-center">
@@ -35,10 +41,7 @@ export default function Bookshelf() {
                   <div className="col-sm-3 my-1">
                     <input type="number" name="searched" className="form-control" id="inlineFormInputName"
                       placeholder="Search for book by age"
-                      onChange={(e) => books
-                        .filter(book => book.age == e.target.value)
-                        .map(book => <BookCard key={book.id} book={book} />)
-                      } />
+                      onChange={searchBook} />
                   </div>
                   <span className="input-group-text border-0" id="search-addon">
                     <i className="fas fa-search"></i>
@@ -52,6 +55,7 @@ export default function Bookshelf() {
 
       <div className="container">
         <div className="row">
+          {search && search.map(book => <BookCard key={book.id} book={book} />)}
           {books.length > 0
             ? books.map(book => <BookCard key={book.id} book={book} />)
             : spinner

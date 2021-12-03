@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { auth } from './utils/firebase.js';
 import UserContext from './context/userContext.js';
-import Header from './components/Header.js';
+import Header from './components/Header/Header.js';
 import Footer from './components/Footer.js';
 import Home from './components/Home.js';
 import AddBook from './components/AddBook.js';
