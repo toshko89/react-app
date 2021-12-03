@@ -10,8 +10,7 @@ export default function Footer() {
             <div className="footer-logo">
 
               <a className="navbar-brand" href="/#">Kids Books</a>
-              <p>We can help our children find the tools they need to succeed in life. Having access to information through the printed word is an absolute necessity. Knowledge is power, and books are full of it. But reading is more than just a practical tool. Through books we can enrich our minds; we can also relax and enjoy some precious leisure moments.
-                With your help, your children can begin a lifelong relationship with the printed word, so they grow into adults who read easily and frequently whether for business, knowledge, or pleasure.
+              <p>We can help our children find the tools they need to succeed in life. Having access to information through the printed word is an absolute necessity. Knowledge is power, and books are full of it. But reading is more than just a practical tool.With your help, your children can begin a lifelong relationship with the printed word, so they grow into adults who read easily and frequently whether for business, knowledge, or pleasure.
               </p>
 
             </div>
