@@ -5,7 +5,7 @@ import BookCard from './BookCard.js';
 export default function Bookshelf() {
 
   const [books, setBooks] = useState({});
-  const [search, setSeatch] = useState([]);
+  const [search, setSeatch] = useState('');
 
   useEffect(() => {
     async function fetchData() {
@@ -15,10 +15,6 @@ export default function Bookshelf() {
     fetchData();
   }, []);
 
-  const searchBook = (e) => {
-    const searched = books.filter(book => book.age == e.target.value);
-    setSeatch(searched);
-  }
 
   const spinner = (
     <div className="d-flex justify-content-center">
@@ -33,31 +29,35 @@ export default function Bookshelf() {
       <div className="container">
         <div className="section-title text-center">
           <h2>Bookshelf</h2>
-          {
-            books.length > 0
-              ?
-              <>
-                <div className="d-flex justify-content-center">
-                  <div className="col-sm-3 my-1">
-                    <input type="number" name="searched" className="form-control" id="inlineFormInputName"
-                      placeholder="Search for book by age"
-                      onChange={searchBook} />
-                  </div>
-                  <span className="input-group-text border-0" id="search-addon">
-                    <i className="fas fa-search"></i>
-                  </span>
+          {books.length > 0
+            ?
+            <>
+              <div className="d-flex justify-content-center">
+                <div className="col-sm-3 my-1">
+                  <input type="number" name="searched" className="form-control" id="inlineFormInputName"
+                    placeholder="Search for book by age"
+                    onChange={(e) => setSeatch(e.target.value)} />
                 </div>
-              </>
-              : <h3 className="separator">No books yet</h3>
-          }
+                <span className="input-group-text border-0" id="search-addon">
+                  <i className="fas fa-search"></i>
+                </span>
+              </div>
+            </>
+            : <h3 className="separator">No books yet</h3>}
         </div>
       </div>
 
       <div className="container">
         <div className="row">
-          {search && search.map(book => <BookCard key={book.id} book={book} />)}
           {books.length > 0
-            ? books.map(book => <BookCard key={book.id} book={book} />)
+            ?
+            books.filter((book) => {
+              if (search === '') {
+                return book;
+              } else if (book.age === search) {
+                return book;
+              }
+            }).map(book => <BookCard key={book.id} book={book} />)
             : spinner
           }
         </div>

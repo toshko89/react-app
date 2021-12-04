@@ -9,7 +9,7 @@ export default function Register() {
 
   const navigate = useNavigate();
 
-  const regExForEmail = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i
+  const regExForEmail = /^[^\s()<>@,;:/]+@\w[\w.-]+\.[a-z]{2,}$/i
 
   const register = async (e) => {
     e.preventDefault();
