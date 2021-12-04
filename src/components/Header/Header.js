@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import UserContext from "../../context/userContext.js";
+import { UserContext } from "../../context/userContext.js";
 import HeaderLoggedIn from "../Header/HeaderLoggedIn.js";
 import HeaderGuest from "../Header/HeaderGuest.js";
 

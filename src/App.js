@@ -1,8 +1,5 @@
-import { onAuthStateChanged } from '@firebase/auth';
 import { Routes, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { auth } from './utils/firebase.js';
-import UserContext from './context/userContext.js';
+import { UserProvider } from './context/userContext.js';
 import Header from './components/Header/Header.js';
 import Footer from './components/Footer.js';
 import Home from './components/Home.js';
@@ -21,25 +18,11 @@ import AboutMe from './components/AboutMe.js';
 
 function App() {
 
-  const [userData, setUser] = useState(null);
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setUser(user);
-    })
-  }, []);
-
-  const user = {
-    isLoggedIn: Boolean(userData),
-    userEmail: userData?.email,
-    userId: userData?.uid
-  };
-
   return (
     <>
-      <UserContext.Provider value={user}>
+      <ErrorBoundary>
 
-        <ErrorBoundary>
+        <UserProvider>
 
           <Header />
           <Routes >
@@ -58,9 +41,9 @@ function App() {
           </Routes >
           <Footer />
 
-        </ErrorBoundary>
+        </UserProvider>
 
-      </UserContext.Provider>
+      </ErrorBoundary>
     </>
   );
 }
