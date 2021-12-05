@@ -14,8 +14,7 @@ export default function Bookshelf() {
     }
     fetchData();
   }, []);
-
-
+  
   const spinner = (
     <div className="d-flex justify-content-center">
       <div className="spinner-border" role="status">
