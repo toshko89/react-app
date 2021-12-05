@@ -1,7 +1,12 @@
 # My first touch with React
 
-App for sharing kids books 
-I used Firebase Auth, Firestore as DB and Firebase Storage for saving files 
+App for sharing kids books.
+I used Firebase Auth, Firestore as DB and Firebase Storage for saving files,
+You can add books after registering, update and delete your own records and like/dislike other books.
+
+## Try it yourself @
+
+https://children-books-react.web.app/
 
 ### Getting Started with Create React App
 
