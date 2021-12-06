@@ -17,8 +17,12 @@ export default function MyBooks() {
       return navigate('/login');
     }
     (async function fetchData() {
-      const myBooks = await getMyBooks(userData);
-      setMyBooks(myBooks);
+      try {
+        const result = await getMyBooks(userData);
+        setMyBooks(result);
+      } catch (error) {
+        console.log(error);
+      }
     })();
   }, [userData]);
 

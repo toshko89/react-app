@@ -9,12 +9,16 @@ export default function Bookshelf() {
 
   useEffect(() => {
     async function fetchData() {
-      const allBooks = await getAllBooks();
-      setBooks(allBooks);
+      try {
+        const result = await getAllBooks();
+        setBooks(result);
+      } catch (error) {
+        console.log(error);
+      }
     }
     fetchData();
   }, []);
-  
+
   const spinner = (
     <div className="d-flex justify-content-center">
       <div className="spinner-border" role="status">

@@ -12,11 +12,15 @@ export default function BookDetails() {
 
   useEffect(() => {
     (async function fetchData() {
-      const book = await getOne(params.bookId);
-      setBook(book);
-      const currentUserLiked = book.totalLikes.some(id => id === user.userId);
-      if (currentUserLiked) {
-        setCanLike(false);
+      try {
+        const result = await getOne(params.bookId);
+        setBook(result);
+        const currentUserLiked = book.totalLikes.some(id => id === user.userId);
+        if (currentUserLiked) {
+          setCanLike(false);
+        }
+      } catch (error) {
+        console.log(error);
       }
     })();
   }, [params.bookId]);

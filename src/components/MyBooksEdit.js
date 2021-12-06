@@ -13,7 +13,6 @@ export default function MyBooksEdit() {
   const user = useContext(UserContext);
   const navigate = useNavigate();
   const params = useParams();
-
   const userData = sessionStorage.user || user.userId;
 
   useEffect(() => {
@@ -21,8 +20,12 @@ export default function MyBooksEdit() {
       return navigate('/login');
     }
     (async function fetchData() {
-      const book = await getOne(params.bookId);
-      setBook(book);
+      try {
+        const result = await getOne(params.bookId);
+        setBook(result);
+      } catch (error) {
+        console.log(error);
+      }
     })();
   }, [userData, params.bookId]);
 
