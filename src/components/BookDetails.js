@@ -13,9 +13,9 @@ export default function BookDetails() {
   useEffect(() => {
     (async function fetchData() {
       try {
-        const result = await getOne(params.bookId);
-        setBook(result);
-        const currentUserLiked = book.totalLikes.some(id => id === user.userId);
+        const currentBook = await getOne(params.bookId);
+        setBook(currentBook);
+        const currentUserLiked = currentBook.totalLikes.some(id => id === user.userId);
         if (currentUserLiked) {
           setCanLike(false);
         }
