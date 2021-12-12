@@ -27,7 +27,7 @@ export default function MyBooksEdit() {
         console.log(error);
       }
     })();
-  }, [userData, params.bookId]);
+  }, [userData, params.bookId, navigate]);
 
   const submitForm = async (e) => {
     e.preventDefault();

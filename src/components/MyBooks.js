@@ -24,7 +24,7 @@ export default function MyBooks() {
         console.log(error);
       }
     })();
-  }, [userData]);
+  }, [userData,navigate]);
 
   return (
 

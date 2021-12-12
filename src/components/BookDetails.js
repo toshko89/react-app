@@ -23,7 +23,7 @@ export default function BookDetails() {
         console.log(error);
       }
     })();
-  }, [params.bookId]);
+  }, [params.bookId,user.userId]);
 
   const like = async (e) => {
     try {
