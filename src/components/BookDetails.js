@@ -23,9 +23,12 @@ export default function BookDetails() {
         console.log(error);
       }
     })();
-  }, [params.bookId,user.userId]);
+  }, [params.bookId, user.userId]);
 
   const like = async (e) => {
+    if (!user.isLoggedIn || user.userId === book.ownerId) {
+      return;
+    }
     try {
       await likeBook(params.bookId, user.userId);
       setCanLike(false);
@@ -38,6 +41,9 @@ export default function BookDetails() {
   }
 
   const disLike = async (e) => {
+    if (!user.isLoggedIn || user.userId === book.ownerId) {
+      return;
+    }
     try {
       await disLikeBook(params.bookId, user.userId);
       setCanLike(false);
