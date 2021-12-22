@@ -3,6 +3,14 @@ import { getAllBooks } from "../services/bookService.js"
 import BookCard from './BookCard.js';
 import Search from './Search.js';
 
+const spinner = (
+  <div className="d-flex justify-content-center">
+    <div className="spinner-border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
+  </div>
+)
+
 export default function Bookshelf() {
 
   const [books, setBooks] = useState({});
@@ -19,14 +27,6 @@ export default function Bookshelf() {
     }
     fetchData();
   }, []);
-
-  const spinner = (
-    <div className="d-flex justify-content-center">
-      <div className="spinner-border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </div>
-    </div>
-  )
 
   return (
     <section id="blog" className="padd-section wow fadeInUp">
