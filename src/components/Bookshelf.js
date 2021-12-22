@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAllBooks } from "../services/bookService.js"
 import BookCard from './BookCard.js';
+import Search from './Search.js';
 
 export default function Bookshelf() {
 
@@ -33,19 +34,7 @@ export default function Bookshelf() {
         <div className="section-title text-center">
           <h2>Bookshelf</h2>
           {books.length > 0
-            ?
-            <>
-              <div className="d-flex justify-content-center">
-                <div className="col-sm-3 my-1">
-                  <input type="number" name="searched" className="form-control" id="inlineFormInputName"
-                    placeholder="Search for book by age"
-                    onChange={(e) => setSeatch(e.target.value)} />
-                </div>
-                <span className="input-group-text border-0" id="search-addon">
-                  <i className="fas fa-search"></i>
-                </span>
-              </div>
-            </>
+            ? <Search setSeatch={setSeatch} />
             : <h3 className="separator">No books yet</h3>}
         </div>
       </div>
