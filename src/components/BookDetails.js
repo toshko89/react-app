@@ -62,6 +62,9 @@ export default function BookDetails() {
 
           <div className="col-md-5 col-lg-3">
             <img src={book.img} alt="About" />
+            <div className="table_btn">
+              <button className="btn btn-info"><i className="fa fa-shopping-cart"></i>  wish list</button>
+            </div>
           </div>
 
           <div className="col-md-7 col-lg-5">
