@@ -15,6 +15,7 @@ import ErrorPage from './components/errorBoundary/ErrorPage.js'
 import ErrorBoundary from './components/errorBoundary/ErrorBoundary.js'
 import AboutUs from './components/AboutUs.js';
 import AboutMe from './components/AboutMe.js';
+import WishList from './components/WishList.js';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/bookshelf" element={<Bookshelf />}></Route>
             <Route path="/my-books" element={<MyBooks />}></Route>
             <Route path="/my-books/:bookId/edit" element={<MyBooksEdit />}></Route>
+            <Route path="/wish-list" element={<WishList />}></Route>
             <Route path="/details/:bookId" element={<BookDetails />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/login" element={<Login />}></Route>

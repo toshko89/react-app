@@ -13,6 +13,7 @@ export default function HeaderLoggedIn({userEmail}) {
             <li className="menu-active"><Link to="/">Home</Link></li>
             <li><NavLink to="/bookshelf">Bookshelf</NavLink></li>
             <li><NavLink to="/my-books">My books</NavLink></li>
+            <li><NavLink to="/wish-list">Wish List</NavLink></li>
             <li><NavLink to="/add-book">Add Book</NavLink></li>
             <li><NavLink to="/logout">Logout</NavLink></li>
             <li><NavLink to="/about-us">About</NavLink></li>
