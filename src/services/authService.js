@@ -1,10 +1,17 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { auth } from '../utils/firebase.js'
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from '../utils/firebase.js'
+
 
 function registerUser(email, password) {
     const userData = createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
+            setDoc(doc(db, "users", user.uid), {
+                email: user.email,
+                wishList: [],
+                orders: [],
+            });
             return user;
         })
         .catch((signUpError) => {
