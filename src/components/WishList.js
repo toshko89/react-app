@@ -1,7 +1,14 @@
+import { useEffect, useState } from "react"
+import { UserContext } from "../context/userContext.js";
 
 
 export default function WishList() {
 
+  const [userWishList,setUserWishList] = useState({});
+  const user = UserContext(UserContext);
+  
+
+  useEffect()
 
   return (
     <section id="pricing" className="padd-section text-center wow fadeInUp">

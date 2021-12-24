@@ -1,6 +1,4 @@
-
-
-// TODO:
+import { doc, getDoc } from "firebase/firestore";
 
 // const getAllBooks = async () => {
 //     try {
@@ -16,13 +14,17 @@
 //     }
 // }
 
-// const getOne = async (bookId) => {
-//     try {
-//         const docRef = doc(db, "books", bookId);
-//         const docSnap = await getDoc(docRef);
-//         return docSnap.data();
-//     } catch (error) {
-//         console.log(error);
-//         throw Error(error);
-//     }
-// }
+const getCurrentUserFromDB = async (userId) => {
+    try {
+        const docRef = doc(db, "users", userId);
+        const docSnap = await getDoc(docRef);
+        return docSnap.data();
+    } catch (error) {
+        console.log(error);
+        throw Error(error);
+    }
+}
+
+export {
+    getCurrentUserFromDB,  
+}

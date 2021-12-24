@@ -8,11 +8,13 @@ function registerUser(email, password) {
         .then((userCredential) => {
             const user = userCredential.user;
             //Only if user data should be kept in DB
-            setDoc(doc(db, "users", user.uid), {
-                email: user.email,
-                wishList: [],
-                orders: [],
-            });
+            if (user) {
+                setDoc(doc(db, "users", user.uid), {
+                    email: user.email,
+                    wishList: [],
+                    orders: [],
+                });
+            }
             return user;
         })
         .catch((signUpError) => {
