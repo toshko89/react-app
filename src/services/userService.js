@@ -1,4 +1,5 @@
 import { doc, getDoc } from "firebase/firestore";
+import { db } from "../utils/firebase.js";
 
 // const getAllBooks = async () => {
 //     try {

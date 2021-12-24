@@ -1,14 +1,24 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../context/userContext.js";
+import { getCurrentUserFromDB } from "../services/userService.js";
 
 
 export default function WishList() {
 
-  const [userWishList,setUserWishList] = useState({});
-  const user = UserContext(UserContext);
-  
+  const [userWishList, setUserWishList] = useState({});
+  const user = useContext(UserContext);
 
-  useEffect()
+  useEffect(() => {
+    (async function fetchData() {
+      try {
+        const wishList = await getCurrentUserFromDB(user.userId);
+        console.log(wishList);
+        setUserWishList(wishList);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [user.userId])
 
   return (
     <section id="pricing" className="padd-section text-center wow fadeInUp">
