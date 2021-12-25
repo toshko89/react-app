@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { UserContext } from "../context/userContext.js";
 import { disLikeBook, getOne, likeBook } from "../services/bookService.js";
+import { addBookToWishList, removeBookFromWishList } from "../services/userService.js";
 
 export default function BookDetails() {
 
@@ -55,6 +56,11 @@ export default function BookDetails() {
     }
   }
 
+  const addToWishList = async (e) => {
+    console.log(book);
+    await addBookToWishList(book,user.userId);
+  }
+
   return (
     <section id="about-us" className="about-us padd-section wow fadeInUp">
       <div className="container">
@@ -63,7 +69,7 @@ export default function BookDetails() {
           <div className="col-md-5 col-lg-3">
             <img src={book.img} alt="About" />
             <div className="table_btn">
-              <button className="btn btn-info"><i className="fa fa-shopping-cart"></i>  wish list</button>
+              <button className="btn btn-info" onClick={addToWishList}><i className="fa fa-shopping-cart"></i>  wish list</button>
             </div>
           </div>
 
