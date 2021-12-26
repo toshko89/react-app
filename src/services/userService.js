@@ -15,6 +15,20 @@ import { db } from "../utils/firebase.js";
 //     }
 // }
 
+const canAddToWishList = async (userId, book) => {
+    try {
+        const docRef = doc(db, "users", userId);
+        const docSnap = await getDoc(docRef);
+        const userData = docSnap.data();
+        const canAdd = userData.wishList.some(books => books.title === book.title);
+        return canAdd;
+
+    } catch (error) {
+        console.log(error);
+        throw Error(error);
+    }
+}
+
 const getCurrentUserFromDB = async (userId) => {
     try {
         const docRef = doc(db, "users", userId);
@@ -51,7 +65,8 @@ const removeBookFromWishList = async (book, userId) => {
 }
 
 export {
-    getCurrentUserFromDB,
+    getCurrentUserFromDB,  
     addBookToWishList,
-    removeBookFromWishList
+    removeBookFromWishList,
+    canAddToWishList
 }
