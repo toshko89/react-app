@@ -19,7 +19,6 @@ export default function WishList() {
     (async function fetchData() {
       try {
         const wishList = await getCurrentUserFromDB(user.userId);
-        console.log(userWishList);
         setUserWishList(wishList);
       } catch (error) {
         console.log(error);

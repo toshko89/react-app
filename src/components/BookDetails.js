@@ -7,6 +7,7 @@ import AddToWishListButton from "./AddToWishListButton.js";
 export default function BookDetails() {
 
   const user = useContext(UserContext);
+  const userData = sessionStorage.user || user.userId;
   const [book, setBook] = useState({});
   const [canLike, setCanLike] = useState(true);
   const params = useParams();
@@ -16,7 +17,7 @@ export default function BookDetails() {
       try {
         const currentBook = await getOne(params.bookId);
         setBook(currentBook);
-        const currentUserLiked = currentBook.totalLikes.some(id => id === user.userId);
+        const currentUserLiked = currentBook.totalLikes.some(id => id === userData);
         if (currentUserLiked) {
           setCanLike(false);
         }
@@ -24,17 +25,17 @@ export default function BookDetails() {
         console.log(error);
       }
     })();
-  }, [params.bookId, user.userId]);
+  }, [params.bookId, userData]);
 
   const like = async (e) => {
-    if (!user.isLoggedIn || user.userId === book.ownerId) {
+    if (!userData || userData === book.ownerId) {
       return;
     }
     try {
-      await likeBook(params.bookId, user.userId);
+      await likeBook(params.bookId, userData);
       setCanLike(false);
       setBook(oldValue => {
-        return { ...book, likes: oldValue.likes + 1, totalLikes: [...book.totalLikes, user.userId] }
+        return { ...book, likes: oldValue.likes + 1, totalLikes: [...book.totalLikes, userData] }
       })
     } catch (error) {
       console.log(error);
@@ -42,14 +43,14 @@ export default function BookDetails() {
   }
 
   const disLike = async (e) => {
-    if (!user.isLoggedIn || user.userId === book.ownerId) {
+    if (!userData || userData === book.ownerId) {
       return;
     }
     try {
-      await disLikeBook(params.bookId, user.userId);
+      await disLikeBook(params.bookId, userData);
       setCanLike(false);
       setBook(oldValue => {
-        return { ...book, likes: oldValue.likes - 1, totalLikes: [...book.totalLikes, user.userId] }
+        return { ...book, likes: oldValue.likes - 1, totalLikes: [...book.totalLikes, userData] }
       })
     } catch (error) {
       console.log(error);
@@ -80,13 +81,13 @@ export default function BookDetails() {
                 <li><i className="fa fa-angle-right"></i>Age: {book.age}</li>
                 <li><i className="fa fa-angle-right"></i>Likes: {book.likes}</li>
               </ul>
-              {(user.isLoggedIn && user.userId !== book.ownerId && canLike)
+              {(userData && userData !== book.ownerId && canLike)
                 ?
                 <div id="likes">
                   <button type="button" className="btn btn-success px-3" onClick={like}><i className="far fa-thumbs-up" aria-hidden="true"></i></button>
                   <button type="button" className="btn btn-danger px-3" onClick={disLike}><i className="far fa-thumbs-down" aria-hidden="true"></i></button>
                 </div>
-                : ''
+                : null
               }
             </div>
           </div>

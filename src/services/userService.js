@@ -1,4 +1,4 @@
-import { arrayRemove, arrayUnion, doc, getDoc, increment, updateDoc } from "firebase/firestore";
+import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../utils/firebase.js";
 
 // const getAllBooks = async () => {
@@ -51,7 +51,7 @@ const removeBookFromWishList = async (book, userId) => {
 }
 
 export {
-    getCurrentUserFromDB,  
+    getCurrentUserFromDB,
     addBookToWishList,
     removeBookFromWishList
 }
