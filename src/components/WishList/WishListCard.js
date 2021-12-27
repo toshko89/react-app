@@ -6,7 +6,6 @@ import { removeBookFromWishList } from "../../services/userService.js";
 export default function WishListCard({ book, user, setUserWishList }) {
 
   const removeBook = useCallback(async () => {
-    console.log(book);
     try {
       await removeBookFromWishList(book, user);
       setUserWishList(oldValues => {
@@ -32,8 +31,7 @@ export default function WishListCard({ book, user, setUserWishList }) {
             <li>{book.description.substring(0, 100)}</li>
           </ul>
           <div className="table_btn">
-            <button type="submit" className="btn btn-info px-3"><i className="fa fa-shopping-cart"></i>Order</button>
-            {/* <Link to={`/my-books/${bookId}/edit`} className="btn btn-success">Edit</Link> */}
+            <Link to={`/wish-list/${book._bookId}/order`} className="btn btn-info px-3"><i className="fa fa-shopping-cart"></i>Order</Link>
           </div>
         </div>
       </div>
