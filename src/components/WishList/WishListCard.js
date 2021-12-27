@@ -10,9 +10,9 @@ export default function WishListCard({ book, user, setUserWishList }) {
       await removeBookFromWishList(book, user);
       setUserWishList(oldValues => {
         return {
-          ...oldValues.orders,
-          ...oldValues.email,
-          ...oldValues.wishList.filter(books => books.title !== book.title)
+          email: oldValues.email,
+          orders: oldValues.orders,
+          wishList: oldValues.wishList.filter(books => books.title !== book.title)
         }
       })
     } catch (error) {

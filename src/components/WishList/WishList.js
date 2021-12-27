@@ -19,7 +19,6 @@ export default function WishList() {
     (async function fetchData() {
       try {
         const wishList = await getCurrentUserFromDB(userData);
-        console.log(wishList);
         setUserWishList(wishList);
       } catch (error) {
         console.log(error);
@@ -40,11 +39,12 @@ export default function WishList() {
         <div className="row">
 
           {userWishList.wishList?.length > 0
-            && userWishList.wishList.map(book => <WishListCard 
+            ? userWishList.wishList.map(book => <WishListCard
               key={book.title}
               book={book}
               user={userData}
               setUserWishList={setUserWishList} />)
+            : <img src="img/download.png" className="center" alt="img" />
           }
 
         </div>
