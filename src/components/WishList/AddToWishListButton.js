@@ -3,7 +3,7 @@ import { UserContext } from "../../context/userContext.js";
 import { addBookToWishList, canAddToWishList } from "../../services/userService.js";
 
 
-export default function AddToWishListButton({ book }) {
+export default function AddToWishListButton({ book, bookId }) {
 
   const user = useContext(UserContext);
   const userData = sessionStorage.user || user.userId;
@@ -20,7 +20,7 @@ export default function AddToWishListButton({ book }) {
       return;
     }
     try {
-      await addBookToWishList(book, userData);
+      await addBookToWishList(book, bookId, userData);
       setCanAdd(true)
     } catch (error) {
       console.log(error);

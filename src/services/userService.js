@@ -40,11 +40,12 @@ const getCurrentUserFromDB = async (userId) => {
     }
 }
 
-const addBookToWishList = async (book, userId) => {
+const addBookToWishList = async (book, bookId, userId) => {
     const bookRef = doc(db, "users", userId);
+    const newBook = { _bookId: bookId, ...book }
     try {
         await updateDoc(bookRef, {
-            wishList: arrayUnion(book)
+            wishList: arrayUnion(newBook)
         });
     } catch (error) {
         console.log(error);
@@ -65,7 +66,7 @@ const removeBookFromWishList = async (book, userId) => {
 }
 
 export {
-    getCurrentUserFromDB,  
+    getCurrentUserFromDB,
     addBookToWishList,
     removeBookFromWishList,
     canAddToWishList

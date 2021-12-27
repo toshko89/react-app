@@ -40,7 +40,7 @@ export default function WishList() {
 
           {userWishList.wishList?.length > 0
             ? userWishList.wishList.map(book => <WishListCard
-              key={book.title}
+              key={book._bookId}
               book={book}
               user={userData}
               setUserWishList={setUserWishList} />)

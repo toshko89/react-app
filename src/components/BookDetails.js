@@ -66,7 +66,7 @@ export default function BookDetails() {
           <div className="col-md-5 col-lg-3">
             <img src={book.img} alt="About" />
             <div className="table_btn">
-              {<AddToWishListButton book={book} />}
+              {<AddToWishListButton book={book} bookId={params.bookId}/>}
             </div>
           </div>
 

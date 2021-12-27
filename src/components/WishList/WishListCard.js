@@ -1,18 +1,19 @@
-import { EmailAuthCredential } from "firebase/auth";
 import { useCallback } from "react";
 import { CloseButton } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { removeBookFromWishList } from "../../services/userService.js";
 
 export default function WishListCard({ book, user, setUserWishList }) {
 
   const removeBook = useCallback(async () => {
+    console.log(book);
     try {
       await removeBookFromWishList(book, user);
       setUserWishList(oldValues => {
         return {
           email: oldValues.email,
           orders: oldValues.orders,
-          wishList: oldValues.wishList.filter(books => books.title !== book.title)
+          wishList: oldValues.wishList.filter(b => b._bookId !== book._bookId)
         }
       })
     } catch (error) {
@@ -32,6 +33,7 @@ export default function WishListCard({ book, user, setUserWishList }) {
           </ul>
           <div className="table_btn">
             <button type="submit" className="btn btn-info px-3"><i className="fa fa-shopping-cart"></i>Order</button>
+            {/* <Link to={`/my-books/${bookId}/edit`} className="btn btn-success">Edit</Link> */}
           </div>
         </div>
       </div>
