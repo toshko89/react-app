@@ -6,8 +6,8 @@ import MyBooksCard from "./MyBooksCard/MyBooksCard.js";
 
 export default function MyBooks() {
 
-  const user = useContext(UserContext);
   const [myBooks, setMyBooks] = useState({});
+  const user = useContext(UserContext);
   const userData = sessionStorage.user || user.userId;
 
   const navigate = useNavigate();

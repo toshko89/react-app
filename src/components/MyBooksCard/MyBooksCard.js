@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { deleteBook } from "../../services/bookService.js";
 import { Modal, Button } from "react-bootstrap";
 import "./MyBooksCard.css"
@@ -11,18 +11,18 @@ export default function MyBooksCard({ bookId, book, setMyBooks }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  async function deleteCurrentBook(e) {
+  const deleteCurrentBook = useCallback(async () => {
     try {
       setMyBooks(oldValues => oldValues.filter(book => book.id !== bookId));
       await deleteBook(bookId, book.img);
     } catch (error) {
       console.log(error);
     }
-  }
+  }, [book, setMyBooks, bookId])
 
   return (
     <div className="col-md-6 col-lg-4">
-      <div className="feature-block" >
+      <div className="feature-block">
         <img src={book.img} alt="img" className="img-fluid" />
         <h4>{book.title}</h4>
         <p>{book.description}</p>
