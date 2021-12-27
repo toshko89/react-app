@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/userContext.js";
-import { addBookToWishList, canAddToWishList } from "../services/userService.js";
+import { UserContext } from "../../context/userContext.js";
+import { addBookToWishList, canAddToWishList } from "../../services/userService.js";
 
 
 export default function AddToWishListButton({ book }) {
@@ -13,7 +13,7 @@ export default function AddToWishListButton({ book }) {
     canAddToWishList(userData, book)
       .then(result => setCanAdd(result))
       .catch(err => console.log(err))
-  })
+  }, [userData, book])
 
   const addToWishList = async (e) => {
     if (!userData || userData === book.ownerId || canAdd) {

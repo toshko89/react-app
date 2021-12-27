@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router";
-import { UserContext } from "../context/userContext.js";
-import { getCurrentUserFromDB } from "../services/userService.js";
+import { UserContext } from "../../context/userContext.js";
+import { getCurrentUserFromDB } from "../../services/userService.js";
 import WishListCard from "./WishListCard.js";
 
 
 export default function WishList() {
 
-  const user = useContext(UserContext);
-  const [userWishList, setUserWishList] = useState({});
   const navigate = useNavigate();
+  const user = useContext(UserContext);
   const userData = sessionStorage.user || user.userId;
+  const [userWishList, setUserWishList] = useState({});
 
   useEffect(() => {
     if (!userData) {
@@ -18,13 +18,14 @@ export default function WishList() {
     }
     (async function fetchData() {
       try {
-        const wishList = await getCurrentUserFromDB(user.userId);
+        const wishList = await getCurrentUserFromDB(userData);
+        console.log(wishList);
         setUserWishList(wishList);
       } catch (error) {
         console.log(error);
       }
     })();
-  }, [user.userId, userData, navigate])
+  }, [userData, navigate])
 
   return (
     <section id="pricing" className="padd-section text-center wow fadeInUp">
@@ -38,7 +39,8 @@ export default function WishList() {
       <div className="container">
         <div className="row">
 
-          {userWishList && <WishListCard />}
+          {userWishList.wishList?.length > 0
+            && userWishList.wishList.map(book => <WishListCard key={book.title} book={book} />)}
 
         </div>
       </div>

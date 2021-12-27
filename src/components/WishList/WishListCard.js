@@ -1,13 +1,12 @@
 
-
-export default function WishListCard() {
-
+export default function WishListCard({book}) {
+  console.log(book);
   return (
     <div className="col-md-6 col-lg-3">
       <div className="block-pricing">
         <div className="table">
-          <h4>PERSONAL</h4>
-          <h2>$29</h2>
+          <h4>{book.title}</h4>
+          <h2>{book.author}</h2>
           <ul className="list-unstyled">
             <li><b>4 GB</b> Ram</li>
             <li><b>7/24</b> Tech Support</li>

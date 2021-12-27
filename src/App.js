@@ -15,7 +15,7 @@ import ErrorPage from './components/errorBoundary/ErrorPage.js'
 import ErrorBoundary from './components/errorBoundary/ErrorBoundary.js'
 import AboutUs from './components/AboutUs.js';
 import AboutMe from './components/AboutMe.js';
-import WishList from './components/WishList.js';
+import WishList from './components/WishList/WishList.js';
 
 function App() {
 
