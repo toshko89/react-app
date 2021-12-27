@@ -10,7 +10,7 @@ export default function WishList() {
   const navigate = useNavigate();
   const user = useContext(UserContext);
   const userData = sessionStorage.user || user.userId;
-  const [userWishList, setUserWishList] = useState({});
+  const [userWishList, setUserWishList] = useState([]);
 
   useEffect(() => {
     if (!userData) {
@@ -40,7 +40,12 @@ export default function WishList() {
         <div className="row">
 
           {userWishList.wishList?.length > 0
-            && userWishList.wishList.map(book => <WishListCard key={book.title} book={book} />)}
+            && userWishList.wishList.map(book => <WishListCard 
+              key={book.title}
+              book={book}
+              user={userData}
+              setUserWishList={setUserWishList} />)
+          }
 
         </div>
       </div>

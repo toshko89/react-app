@@ -13,8 +13,8 @@ export default function MyBooksCard({ bookId, book, setMyBooks }) {
 
   const deleteCurrentBook = useCallback(async () => {
     try {
-      setMyBooks(oldValues => oldValues.filter(book => book.id !== bookId));
       await deleteBook(bookId, book.img);
+      setMyBooks(oldValues => oldValues.filter(book => book.id !== bookId));
     } catch (error) {
       console.log(error);
     }
