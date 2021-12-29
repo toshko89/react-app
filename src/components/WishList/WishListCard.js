@@ -31,7 +31,8 @@ export default function WishListCard({ book, user, setUserWishList }) {
             <li>{book.description.substring(0, 100)}</li>
           </ul>
           <div className="table_btn">
-            <Link to={`/wish-list/${book._bookId}/order`} className="btn btn-info px-3"><i className="fa fa-shopping-cart"></i>Order</Link>
+            <Link to={`/wish-list/${book._bookId}/order`} className="btn btn-info px-3">
+              <i className="fa fa-shopping-cart"></i>Order</Link>
           </div>
         </div>
       </div>
