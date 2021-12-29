@@ -1,19 +1,7 @@
 import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../utils/firebase.js";
 
-// const getAllBooks = async () => {
-//     try {
-//         const querySnapshot = await getDocs(collection(db, "books"));
-//         const allBooks = querySnapshot.docs.map((doc) => {
-//             return { id: doc.id, ...doc.data() }
-//         });
 
-//         return allBooks;
-//     } catch (error) {
-//         console.log(error);
-//         throw Error(error);
-//     }
-// }
 
 const canAddToWishList = async (userId, book) => {
     try {
@@ -41,10 +29,10 @@ const getCurrentUserFromDB = async (userId) => {
 }
 
 const addBookToWishList = async (book, bookId, userId) => {
-    const bookRef = doc(db, "users", userId);
+    const docRef = doc(db, "users", userId);
     const newBook = { _bookId: bookId, ...book }
     try {
-        await updateDoc(bookRef, {
+        await updateDoc(docRef, {
             wishList: arrayUnion(newBook)
         });
     } catch (error) {
@@ -54,10 +42,27 @@ const addBookToWishList = async (book, bookId, userId) => {
 }
 
 const removeBookFromWishList = async (book, userId) => {
-    const bookRef = doc(db, "users", userId);
+    const docRef = doc(db, "users", userId);
     try {
-        await updateDoc(bookRef, {
+        await updateDoc(docRef, {
             wishList: arrayRemove(book)
+        });
+    } catch (error) {
+        console.log(error);
+        throw Error(error);
+    }
+}
+
+const addUserDataToOrderList = async (ownerId, bookTitle, orderData) => {
+    const docRef = doc(db, "users", ownerId);
+    const userData = {
+        bookTitle,
+        orderData
+    }
+    console.log(userData);
+    try {
+        await updateDoc(docRef, {
+            orders: arrayUnion(userData)
         });
     } catch (error) {
         console.log(error);
@@ -69,5 +74,6 @@ export {
     getCurrentUserFromDB,
     addBookToWishList,
     removeBookFromWishList,
+    addUserDataToOrderList,
     canAddToWishList
 }
