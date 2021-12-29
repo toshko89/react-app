@@ -38,7 +38,7 @@ export default function WishList() {
       <div className="container">
         <div className="row">
 
-          {userWishList.wishList?.length > 0
+          {userWishList && userWishList.wishList?.length > 0
             ? userWishList.wishList.map(book => <WishListCard
               key={book._bookId}
               book={book}
