@@ -8,13 +8,13 @@ import Bookshelf from './components/Bookshelf.js';
 import BookDetails from './components/BookDetails.js';
 import MyBooks from './components/MyBooks.js';
 import MyBooksEdit from './components/MyBooksEdit.js';
-import Register from './components/Register.js';
-import Login from './components/Login.js';
-import Logout from './components/Logout.js';
+import Register from './components/AuthComponents/Register.js';
+import Login from './components/AuthComponents/Login.js';
+import Logout from './components/AuthComponents/Logout.js';
 import ErrorPage from './components/errorBoundary/ErrorPage.js'
 import ErrorBoundary from './components/errorBoundary/ErrorBoundary.js'
-import AboutUs from './components/AboutUs.js';
-import AboutMe from './components/AboutMe.js';
+import AboutUs from './components/AboutComponents/AboutUs.js';
+import AboutMe from './components/AboutComponents/AboutMe.js';
 import WishList from './components/WishList/WishList.js';
 import OrderBookForm from './components/OrderBookForm.js';
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { registerUser } from "../services/authService.js";
+import { registerUser } from "../../services/authService.js";
 
 
 export default function Register() {
