@@ -16,8 +16,6 @@ export default function OrderBookForm() {
   const [show, setShow] = useState(false);
   const regexCheckForNames = /^[a-zA-Z]+(?:[\s.]+[a-zA-Z]+)*$/i;
 
-  console.log(book);
-
   useEffect(() => {
     if (!userData) {
       return navigate('/login');
@@ -47,8 +45,8 @@ export default function OrderBookForm() {
 
     try {
       await addUserDataToOrderList(book.ownerId, book.title, orderData);
-      await removeBookFromWishList(book, user);
-      navigate('/wish-list');
+      await removeBookFromWishList(book, userData);
+      return navigate('/wish-list');
     } catch (error) {
       setError('There was problem with your order plase try again');
       handleClose();

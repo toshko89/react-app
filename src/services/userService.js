@@ -42,6 +42,8 @@ const addBookToWishList = async (book, bookId, userId) => {
 }
 
 const removeBookFromWishList = async (book, userId) => {
+    console.log(book);
+    console.log(userId);
     const docRef = doc(db, "users", userId);
     try {
         await updateDoc(docRef, {
