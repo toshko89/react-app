@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router";
-import { UserContext } from "../context/userContext.js";
-import { addUserDataToOrderList, removeBookFromWishList } from "../services/userService.js";
+import { UserContext } from "./../../context/userContext.js";
+import { addUserDataToOrderList, removeBookFromWishList } from "../../services/userService.js";
 
 export default function OrderBookForm() {
 
