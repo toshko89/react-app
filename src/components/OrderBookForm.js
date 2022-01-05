@@ -48,7 +48,7 @@ export default function OrderBookForm() {
       await removeBookFromWishList(book, userData);
       return navigate('/wish-list');
     } catch (error) {
-      setError('There was problem with your order plase try again');
+      setError('There was problem with your order please try again');
       handleClose();
       console.log(error);
     }
@@ -98,9 +98,9 @@ export default function OrderBookForm() {
                     <i className="fa fa-shopping-cart"></i> Confirm</button>
                   <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                      <Modal.Title>Delete Book</Modal.Title>
+                      <Modal.Title>Order confirmation</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Are you sure you want to delete this book?</Modal.Body>
+                    <Modal.Body>Please confirm your order</Modal.Body>
                     <Modal.Footer>
                       <Button variant="secondary" onClick={handleClose}>
                         Close

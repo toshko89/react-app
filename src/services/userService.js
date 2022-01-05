@@ -42,8 +42,6 @@ const addBookToWishList = async (book, bookId, userId) => {
 }
 
 const removeBookFromWishList = async (book, userId) => {
-    console.log(book);
-    console.log(userId);
     const docRef = doc(db, "users", userId);
     try {
         await updateDoc(docRef, {
@@ -61,7 +59,6 @@ const addUserDataToOrderList = async (ownerId, bookTitle, orderData) => {
         bookTitle,
         orderData
     }
-    console.log(userData);
     try {
         await updateDoc(docRef, {
             orders: arrayUnion(userData)
