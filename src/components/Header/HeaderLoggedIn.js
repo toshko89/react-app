@@ -15,7 +15,7 @@ export default function HeaderLoggedIn({userEmail}) {
             <li><NavLink to="/add-book">Add Book</NavLink></li>
             <li><NavLink to="/my-books">My books</NavLink></li>
             <li><NavLink to="/wish-list">Wish List</NavLink></li>
-            <li><NavLink to="/orders">Orders</NavLink></li>
+            <li><NavLink to="/orders">New Orders</NavLink></li>
             <li><NavLink to="/logout">Logout</NavLink></li>
             <li><NavLink to="/about-us">About</NavLink></li>
           </ul>

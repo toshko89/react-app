@@ -28,6 +28,18 @@ const getCurrentUserFromDB = async (userId) => {
     }
 }
 
+const getOrderList = async (userId) => {
+    try {
+        const docRef = doc(db, "users", userId);
+        const docSnap = await getDoc(docRef);
+        const data = docSnap.data();
+        return data.orders;
+    } catch (error) {
+        console.log(error);
+        throw Error(error);
+    }
+}
+
 const addBookToWishList = async (book, bookId, userId) => {
     const docRef = doc(db, "users", userId);
     const newBook = { _bookId: bookId, ...book }
@@ -74,5 +86,6 @@ export {
     addBookToWishList,
     removeBookFromWishList,
     addUserDataToOrderList,
-    canAddToWishList
+    canAddToWishList,
+    getOrderList
 }

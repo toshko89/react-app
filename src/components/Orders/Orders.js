@@ -1,6 +1,31 @@
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { UserContext } from "../../context/userContext.js";
+import { getOrderList } from "../../services/userService.js";
+import OrderCard from "./OrderCard.js";
 
 
 export default function Orders() {
+
+  const navigate = useNavigate();
+  const user = useContext(UserContext);
+  const userData = sessionStorage.user || user.userId;
+  const [orderList, setOrderList] = useState([]);
+
+  useEffect(() => {
+    if (!userData) {
+      return navigate('/login');
+    }
+    (async function fetchData() {
+      try {
+        const orders = await getOrderList(userData);
+        console.log(orders);
+        setOrderList(orders);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [userData, navigate])
 
 
   return (
@@ -9,77 +34,13 @@ export default function Orders() {
       <div className="container">
         <div className="section-title text-center">
           <h2>Orders to be shipped</h2>
-          <p className="separator">You have new orderes</p>
+          <p className="separator">You have {orderList.length} new orderes</p>
         </div>
       </div>
 
       <div className="container">
         <div className="row">
-
-          <div className="col-md-6 col-lg-3">
-            <div className="feature-block">
-              <img src="img/svg/paint-palette.svg" alt="img" className="img-fluid" />
-              <h4>creative design</h4>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-3">
-            <div className="feature-block">
-              <img src="img/svg/vector.svg" alt="img" className="img-fluid" />
-              <h4>Retina Ready</h4>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-3">
-            <div className="feature-block">
-              <img src="img/svg/design-tool.svg" alt="img" className="img-fluid" />
-              <h4>easy to use</h4>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-3">
-            <div className="feature-block">
-              <img src="img/svg/asteroid.svg" alt="img" className="img-fluid" />
-              <h4>Free Updates</h4>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-3">
-            <div className="feature-block">
-              <img src="img/svg/asteroid.svg" alt="img" className="img-fluid" />
-              <h4>Free Updates</h4>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-3">
-            <div className="feature-block">
-              <img src="img/svg/cloud-computing.svg" alt="img" className="img-fluid" />
-              <h4>App store support</h4>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-3">
-            <div className="feature-block">
-              <img src="img/svg/pixel.svg" alt="img" className="img-fluid" />
-              <h4>Perfect Pixel</h4>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-3">
-            <div className="feature-block">
-              <img src="img/svg/code.svg" alt="img" className="img-fluid" />
-              <h4>clean codes</h4>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-            </div>
-          </div>
-
+          {orderList.length > 0 ? orderList.map(order => <OrderCard key={order.title} order={order} />) : null}
         </div>
       </div>
     </section>
