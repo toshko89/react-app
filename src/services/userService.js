@@ -2,7 +2,6 @@ import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from "firebase/firest
 import { db } from "../utils/firebase.js";
 
 
-
 const canAddToWishList = async (userId, book) => {
     try {
         const docRef = doc(db, "users", userId);
@@ -42,7 +41,7 @@ const getOrderList = async (userId) => {
 
 const addBookToWishList = async (book, bookId, userId) => {
     const docRef = doc(db, "users", userId);
-    const newBook = { _bookId: bookId, ...book }
+    const newBook = { _bookId: bookId, ...book, _ordered: false }
     try {
         await updateDoc(docRef, {
             wishList: arrayUnion(newBook)
@@ -52,6 +51,19 @@ const addBookToWishList = async (book, bookId, userId) => {
         throw Error(error);
     }
 }
+
+// const updateWishListOnOrder = async (book, userId) => {
+//     const docRef = doc(db, "users", userId);
+//     const newBook = { ...book, _ordered: true }
+//     try {
+//         await updateDoc(docRef, {
+//             wishList: book._ordered = true
+//         });
+//     } catch (error) {
+//         console.log(error);
+//         throw Error(error);
+//     }
+// }
 
 const removeBookFromWishList = async (book, userId) => {
     const docRef = doc(db, "users", userId);
@@ -84,6 +96,7 @@ const addUserDataToOrderList = async (ownerId, bookTitle, orderData) => {
 export {
     getCurrentUserFromDB,
     addBookToWishList,
+    updateWishListOnOrder,
     removeBookFromWishList,
     addUserDataToOrderList,
     canAddToWishList,

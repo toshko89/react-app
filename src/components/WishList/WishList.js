@@ -19,6 +19,7 @@ export default function WishList() {
     (async function fetchData() {
       try {
         const wishList = await getCurrentUserFromDB(userData);
+        console.log(wishList);
         setUserWishList(wishList);
       } catch (error) {
         console.log(error);
