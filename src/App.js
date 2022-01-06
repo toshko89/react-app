@@ -1,13 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
 import { UserProvider } from './context/userContext.js';
 import Header from './components/Header/Header.js';
-import Footer from './components/Footer.js';
-import Home from './components/Home.js';
+import Footer from './components/Home/Footer.js';
+import Home from './components/Home/Home.js';
 import AddBook from './components/AddBook.js';
-import Bookshelf from './components/Bookshelf.js';
+import Bookshelf from './components/Home/Bookshelf.js';
 import BookDetails from './components/BookDetails.js';
-import MyBooks from './components/MyBooks.js';
-import MyBooksEdit from './components/MyBooksEdit.js';
+import MyBooks from './components/MyBooks/MyBooks.js';
+import MyBooksEdit from './components/MyBooks/MyBooksEdit.js';
 import Register from './components/AuthComponents/Register.js';
 import Login from './components/AuthComponents/Login.js';
 import Logout from './components/AuthComponents/Logout.js';

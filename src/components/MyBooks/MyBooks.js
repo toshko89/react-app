@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { UserContext } from "../context/userContext.js";
-import { getMyBooks } from "../services/bookService.js";
-import MyBooksCard from "./MyBooksCard/MyBooksCard.js";
+import { UserContext } from "../../context/userContext.js";
+import { getMyBooks } from "../../services/bookService.js";
+import MyBooksCard from "./MyBooksCard.js";
 
 export default function MyBooks() {
 

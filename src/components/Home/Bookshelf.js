@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getAllBooks } from "../services/bookService.js"
-import BookCard from './BookCard.js';
+import { getAllBooks } from "../../services/bookService.js"
+import BookCard from '../BookCard.js';
 import Search from './Search.js';
 
 const spinner = (
