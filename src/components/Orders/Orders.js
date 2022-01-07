@@ -19,7 +19,6 @@ export default function Orders() {
     (async function fetchData() {
       try {
         const orders = await getOrderList(userData);
-        console.log(orders);
         setOrderList(orders);
       } catch (error) {
         console.log(error);

@@ -16,6 +16,9 @@ export default function OrderBookForm() {
   const [show, setShow] = useState(false);
   const regexCheckForNames = /^[a-zA-Z]+(?:[\s.]+[a-zA-Z]+)*$/i;
 
+  console.log(book);
+  //да сложа ид на книгите при поръчка
+
   useEffect(() => {
     if (!userData) {
       return navigate('/login');
