@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router";
 import { UserContext } from "./../../context/userContext.js";
-import { addUserDataToOrderList, updateWishListOnOrder } from "../../services/userService.js";
+import { addUserDataToOrderList, removeBookFromWishList } from "../../services/userService.js";
 
 export default function OrderBookForm() {
 
@@ -25,7 +25,6 @@ export default function OrderBookForm() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(book);
 
   const confirmOrder = async (e) => {
     if (!regexCheckForNames.test(orderData.customerName)) {
@@ -47,8 +46,7 @@ export default function OrderBookForm() {
 
     try {
       await addUserDataToOrderList(book.ownerId, book.title, orderData);
-      // await removeBookFromWishList(book, userData);
-      await updateWishListOnOrder(book, userData)
+      await removeBookFromWishList(book, userData);
       return navigate('/wish-list');
     } catch (error) {
       setError('There was problem with your order please try again');
