@@ -7,21 +7,23 @@ export default function AddToWishListButton({ book, bookId }) {
 
   const user = useContext(UserContext);
   const userData = sessionStorage.user || user.userId;
-  const [canAdd, setCanAdd] = useState(false);
+  const [canNotAdd, setCanNotAdd] = useState(false);
 
   useEffect(() => {
-    canAddToWishList(userData, book)
-      .then(result => setCanAdd(result))
-      .catch(err => console.log(err))
+    if (userData) {
+      canAddToWishList(userData, book)
+        .then(result => setCanNotAdd(result))
+        .catch(err => console.log(err))
+    }
   }, [userData, book])
 
   const addToWishList = async (e) => {
-    if (!userData || userData === book.ownerId || canAdd) {
+    if (!userData || userData === book.ownerId || canNotAdd) {
       return;
     }
     try {
       await addBookToWishList(book, bookId, userData);
-      setCanAdd(true)
+      setCanNotAdd(true)
     } catch (error) {
       console.log(error);
     }
@@ -30,7 +32,7 @@ export default function AddToWishListButton({ book, bookId }) {
 
   return (
     <>
-      {userData && userData !== book.ownerId && !canAdd
+      {userData && userData !== book.ownerId && !canNotAdd
         ?
         <button className="btn btn-info" onClick={addToWishList}><i className="fa fa-shopping-cart">
         </i>  wish list</button>

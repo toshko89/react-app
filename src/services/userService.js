@@ -64,10 +64,11 @@ const removeBookFromWishList = async (book, userId) => {
     }
 }
 
-const addUserDataToOrderList = async (ownerId, bookTitle, orderData) => {
+const addUserDataToOrderList = async (ownerId, bookTitle, bookId, orderData) => {
     const docRef = doc(db, "users", ownerId);
     const userData = {
         bookTitle,
+        bookId,
         orderData
     }
     try {
