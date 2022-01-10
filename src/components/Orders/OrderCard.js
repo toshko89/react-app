@@ -1,6 +1,13 @@
+import { useCallback } from "react";
+import { CloseButton } from "react-bootstrap";
+import { removeUserDataFromOrderList } from "../../services/userService.js";
 
+export default function OrderCard({ order, ownerId, bookID }) {
 
-export default function OrderCard({ order }) {
+  const clearBook = useCallback(async () => {
+    await removeUserDataFromOrderList(ownerId, order);
+    console.log("click");
+  },[ownerId,bookID])
 
   return (
     <div className="col-md-6 col-lg-3">
@@ -12,6 +19,7 @@ export default function OrderCard({ order }) {
           <li><i className="fa fa-angle-right"></i>Phone: {order.orderData.customerPhone}</li>
           <li><i className="fa fa-angle-right"></i>Ship to: {order.orderData.customerAddress}</li>
         </ul>
+        <CloseButton onClick={clearBook} />
       </div>
     </div>
   )

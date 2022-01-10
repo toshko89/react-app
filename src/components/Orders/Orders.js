@@ -39,7 +39,10 @@ export default function Orders() {
 
       <div className="container">
         <div className="row">
-          {orderList.length > 0 ? orderList.map(order => <OrderCard key={order.title} order={order} />) : null}
+          {orderList.length > 0 ? orderList.map(order => <OrderCard key={order.bookId}
+            ownerId={userData}
+            bookID={order.bookId}
+            order={order} />) : null}
         </div>
       </div>
     </section>

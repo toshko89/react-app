@@ -3,6 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router";
 import { UserContext } from "./../../context/userContext.js";
 import { addUserDataToOrderList, removeBookFromWishList } from "../../services/userService.js";
+const regexCheckForNames = /^[a-zA-Z]+(?:[\s.]+[a-zA-Z]+)*$/i;
 
 export default function OrderBookForm() {
 
@@ -14,10 +15,6 @@ export default function OrderBookForm() {
   const [error, setError] = useState(null);
   const [orderData, setOrderData] = useState({ customerName: '', customerPhone: '', customerAddress: '' });
   const [show, setShow] = useState(false);
-  const regexCheckForNames = /^[a-zA-Z]+(?:[\s.]+[a-zA-Z]+)*$/i;
-
-  console.log(book);
-  //да сложа ид на книгите при поръчка
 
   useEffect(() => {
     if (!userData) {
@@ -27,7 +24,6 @@ export default function OrderBookForm() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
 
   const confirmOrder = async (e) => {
     if (!regexCheckForNames.test(orderData.customerName)) {

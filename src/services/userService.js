@@ -81,11 +81,24 @@ const addUserDataToOrderList = async (ownerId, bookTitle, bookId, orderData) => 
     }
 }
 
+const removeUserDataFromOrderList = async (ownerId,order) => {
+    const docRef = doc(db, "users", ownerId);
+    try {
+        await updateDoc(docRef, {
+            orders: arrayRemove(order)
+        });
+    } catch (error) {
+        console.log(error);
+        throw Error(error);
+    }
+}
+
 export {
     getCurrentUserFromDB,
     addBookToWishList,
     removeBookFromWishList,
     addUserDataToOrderList,
+    removeUserDataFromOrderList,
     canAddToWishList,
     getOrderList
 }
