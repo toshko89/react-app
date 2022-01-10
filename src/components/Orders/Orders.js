@@ -39,7 +39,7 @@ export default function Orders() {
 
       <div className="container">
         <div className="row">
-          {orderList.length > 0 ? orderList.map(order => <OrderCard key={order.bookId}
+          {orderList.length > 0 ? orderList.map(order => <OrderCard key={order.bookId + Math.random()}
             ownerId={userData}
             bookID={order.bookId}
             order={order} />) : null}
