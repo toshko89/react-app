@@ -26,8 +26,6 @@ export default function Orders() {
     })();
   }, [userData, navigate])
 
-  console.log(orderList);
-
   return (
     <section id="features" className="padd-section text-center wow fadeInUp">
 
