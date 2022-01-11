@@ -26,6 +26,7 @@ export default function Orders() {
     })();
   }, [userData, navigate])
 
+  console.log(orderList);
 
   return (
     <section id="features" className="padd-section text-center wow fadeInUp">
@@ -39,10 +40,11 @@ export default function Orders() {
 
       <div className="container">
         <div className="row">
-          {orderList.length > 0 ? orderList.map(order => <OrderCard key={order.bookId + Math.random()}
+          {orderList && orderList.map(order => <OrderCard key={order.bookId + Math.random()}
             ownerId={userData}
             bookID={order.bookId}
-            order={order} />) : null}
+            setOrderList={setOrderList}
+            order={order} />)}
         </div>
       </div>
     </section>

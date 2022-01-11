@@ -2,12 +2,18 @@ import { useCallback } from "react";
 import { CloseButton } from "react-bootstrap";
 import { removeUserDataFromOrderList } from "../../services/userService.js";
 
-export default function OrderCard({ order, ownerId }) {
+export default function OrderCard({ order, ownerId, bookID, setOrderList }) {
 
   const clearBook = useCallback(async () => {
-    await removeUserDataFromOrderList(ownerId, order);
-    console.log("click");
-  }, [ownerId, order])
+    try {
+      await removeUserDataFromOrderList(ownerId, order);
+      setOrderList(oldValues => {
+        return oldValues.filter(book => book.bookId !== bookID)
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }, [ownerId, order, bookID, setOrderList])
 
   return (
     <div className="col-md-6 col-lg-3">
